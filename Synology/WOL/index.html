@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wake-on-LAN</title>
+    
+    <!-- Importing jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Script to handle Wake-on-LAN requests -->
+    <script>
+        function sendWakeOnLan(macAddress) {
+            $.ajax({
+                type: "POST",
+                url: "wol.php", // Ensure this URL is correct
+                data: { mac: macAddress },
+                success: function(response) {
+                    alert(response);
+                },
+                error: function() {
+                    alert("Error sending the magic packet.");
+                }
+            });
+        }
+    </script>
+    
+    <!-- Basic styling for the page and buttons -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 600px; /* Adjust this width as needed */
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <!-- Buttons to trigger Wake-on-LAN for different devices -->
+        <button onclick="sendWakeOnLan('00:C6:91:00:72:0A')">Réveiller NUC3</button>
+        <button onclick="sendWakeOnLan('94:00:91:00:3D:00')">Réveiller NUC5</button>
+        <button onclick="sendWakeOnLan('00:00:32:00:EF:09')">Réveiller NAS2</button>
+    </div>
+</body>
+</html>
