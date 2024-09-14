@@ -1,0 +1,1 @@
+https://blog.wuibaille.fr/2024/09/function-to-calculate-the-start-and-end-addresses/

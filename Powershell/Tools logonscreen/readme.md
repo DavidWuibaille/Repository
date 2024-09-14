@@ -1,0 +1,1 @@
+https://blog.wuibaille.fr/2024/08/creating-a-custom-logon-script-using-powershell-and-wpf/
