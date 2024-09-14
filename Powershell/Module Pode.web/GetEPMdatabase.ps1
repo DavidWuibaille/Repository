@@ -9,7 +9,7 @@ Start-PodeServer {
     # Define the route to get the computer name based on the MAC address
     Add-PodeRoute -Method Get -Path '/GetName' -ScriptBlock {
         # Retrieve the MAC address from the query parameters
-        $macaddress = $WebEvent.Query['macadress']
+        $macaddress = $WebEvent.Query['macaddress']
         Write-Host "Received MAC Address: $macaddress"
  
         $user = 'sa'
