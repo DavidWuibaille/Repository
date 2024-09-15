@@ -1,0 +1,9 @@
+option batch abort
+option confirm off
+open ftp://kbftp:getbxf@K1000
+lcd "C:\Users\Administrateur\Desktop\backup"
+cd /
+option transfer binary
+get *_k1*.tgz
+close
+exit
