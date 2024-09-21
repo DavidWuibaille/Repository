@@ -1,0 +1,102 @@
+[Version]
+Signature="$Chicago$"
+
+[DefaultInstall]
+AddReg=iaStorCritical.Reg, iaStorSvc.Reg
+CopyFiles=iaStor_Driver_File
+
+[DefaultUninstall]
+DelReg=iaStorCritical.DelReg, iaStorSvc.DelReg
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[iaStor_Driver_File]
+iaStor.sys,,,0x00000010
+
+
+
+;============================================================================================================
+; ICH9M - Critical Boot Device Database
+; %PCI\VEN_8086&DEV_2929&CC_0106.DeviceDesc% = iaStor_Inst, PCI\VEN_8086&DEV_2929&CC_0106
+; ICH8M - Critical Boot Device Database
+; %PCI\VEN_8086&DEV_2829&CC_0106.DeviceDesc% = iaStor_mobl_Inst,PCI\VEN_8086&DEV_2829&CC_0106
+; ICH7M - Critical Boot Device Database
+; %PCI\VEN_8086&DEV_27C5&CC_0106.DeviceDesc% = iaStor_mobl_Inst,PCI\VEN_8086&DEV_27C5&CC_0106
+;============================================================================================================
+[iaStorCritical.Reg]
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2929&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2929&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2829&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2829&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_27c5&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_27c5&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b29&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b29&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b2f&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b2f&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_282a&cc_0104,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_282a&cc_0104,ClassGUID,%REG_SZ%,"{4D36E97B-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1C03&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1C03&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1E03&cc_0106,Service,%REG_SZ%,%IASTOR_SVC%
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1E03&cc_0106,ClassGUID,%REG_SZ%,"{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+[iaStorCritical.DelReg]
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2929&cc_0106
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2829&cc_0106
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_27c5&cc_0106
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b29&cc_0106
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_3b2f&cc_0106
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_282a&cc_0104
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1C03&cc_0104
+HKLM,System\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1E03&cc_0104
+
+;============================================================================================================
+; Storage Service - Parameter Set (ICH8M)
+;============================================================================================================
+[iaStorSvc.Reg]
+HKLM,System\CurrentControlSet\Services\iastor,ErrorControl,%REG_DWORD%,1
+HKLM,System\CurrentControlSet\Services\iastor,Group,%REG_SZ%,"SCSI miniport"
+HKLM,System\CurrentControlSet\Services\iastor,Start,%REG_DWORD%,0
+HKLM,System\CurrentControlSet\Services\iastor,Type,%REG_DWORD%,1
+HKLM,System\CurrentControlSet\Services\iastor,DisplayName,%REG_SZ%,%*PNP0600.DeviceDesc%
+HKLM,System\CurrentControlSet\Services\iastor,ImagePath,%REG_SZ%,"System32\Drivers\iaStor.sys"
+
+HKLM,System\CurrentControlSet\Services\iastor,Tag,%REG_DWORD%,25
+
+[iaStorSvc.DelReg]
+HKLM,System\CurrentControlSet\Services\iastor
+
+
+[SourceDisksNames]
+1=%ProdName%,,
+
+[SourceDisksFiles]
+imsm_pre.inf=1
+iaStor.sys=1, ..\,
+
+[Strings]
+ProdName="IMSM Critical Database Preparation for Windows XP 64bit"
+ProdVersion="1.0"
+
+IASTOR_SVC="iaStor"
+*PNP0600.DeviceDesc="Intel AHCI Controller"
+
+
+INTEL="Intel"
+AN="AN"
+LPM="LPM"
+LPMSTATE="LPMSTATE"
+LPMDSTATE="LPMDSTATE"
+GTF="GTF"
+DIPM="DIPM"
+
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_ERROR_NORMAL   = 1
+REG_SZ                 = 0x00000000
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

@@ -1,0 +1,29 @@
+**** Begin CleanDRM *************************************************
+**
+** LogFile   : C:\SYSPREP\cleandrm.log
+** CleanDRM TimeStamp : 29/03/2011, 11:23:39
+** CleanDRM Version : 11.0.5721.5143
+**
+[Open data store for Exclusive]
+[Check license files]
+   Checking C:\Documents and Settings\All Users\DRM...
+[Check indiv files]
+   No indiv files found
+[Check registry]
+[Delete files]
+   C:\Documents and Settings\All Users\DRM\v3ks.bla : deleted
+   C:\Documents and Settings\All Users\DRM\v3ks.sec : deleted
+   C:\Documents and Settings\All Users\DRM\drmv2.lic : deleted
+   C:\Documents and Settings\All Users\DRM\drmv2.sst : deleted
+[Clean registry]
+   (default)    : deleted
+   (default)    : deleted
+   (default)    : deleted
+   DataPath     : deleted
+[Register DRM libraries]
+   Register drmv2clt.dll: DllRegisterServer returned 0x00000000.
+**** CleanDRM succeeded ******************************************
+**
+**** End CleanDRM ***************************************************
+
+

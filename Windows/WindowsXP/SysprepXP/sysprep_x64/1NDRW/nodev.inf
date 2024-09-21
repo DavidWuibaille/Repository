@@ -1,0 +1,46 @@
+;#####################################################################
+;  Copyright © 2005, LSI Corp..
+;#####################################################################
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%DELL%
+CatalogFile=percsas2.cat
+CatalogFile.ntamd64=percsas2.cat
+DriverVer=06/01/2012,5.1.119.64
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[SourceDisksNames]
+
+[SourceDisksFiles.amd64]
+
+
+[Manufacturer]
+%DELL%=DELL, NTamd64
+
+[DELL.NTamd64]
+%NULL.DeviceDesc%     = percsas_Inst, SCSI\Other__RAID___DummyDevice____0001    
+
+
+[percsas_Inst]
+AddReg=raid_addreg
+
+
+[percsas_Inst.Services]
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+
+[strings]
+DELL                  = "DELL"
+NULL.DeviceDesc       = "DELL PERC RAID Virtual Device"
+
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+
+[raid_addreg]
+HKR, "Parameters\virtualraid", "level", 0x00010001, 0x00000001

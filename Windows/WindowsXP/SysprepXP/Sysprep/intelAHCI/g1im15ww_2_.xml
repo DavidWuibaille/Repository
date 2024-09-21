@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?pcdDescriptor version="0230"?>
+<Package name="IMSM" id="g1im15ww" version="11.2.0.1006" hide="False">
+  <Title default="EN">
+    <Desc id="EN">Intel Rapid Storage AHCI Driver for Windows 32bit</Desc>
+  </Title>
+  <Summary default="EN" />
+  <Severity type="1" />
+  <Vendor>Lenovo</Vendor>
+  <ExtractCommand>g1im15ww.exe /VERYSILENT /DIR=%PACKAGEPATH%</ExtractCommand>
+  <ReleaseDate>2012-06-27</ReleaseDate>
+  <DiskSpaceNeeded>1200000</DiskSpaceNeeded>
+  <Reboot type="3" />
+  <Preload />
+  <Install rc="0" type="inf" default="EN">
+    <INFCmd id="EN">
+      <INFfile>iaAHCI.inf</INFfile>
+      <Mfg>%INTEL%</Mfg>
+      <DeviceDesc>%PCI\VEN_8086&amp;DEV_3B2F&amp;CC_0106.DeviceDesc%</DeviceDesc>
+      <DeviceDesc>%PCI\VEN_8086&amp;DEV_1C03&amp;CC_0106.DeviceDesc%</DeviceDesc>
+      <DeviceDesc>%PCI\VEN_8086&amp;DEV_1E03&amp;CC_0106.DeviceDesc%</DeviceDesc>
+    </INFCmd>
+  </Install>
+  <Uninstall />
+  <DetectInstall>
+    <And>
+      <_RegistryKeyValue type="REG_SZ">
+        <Key>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iaStor\Enum</Key>
+        <KeyName>0</KeyName>
+        <Level>PCI*</Level>
+      </_RegistryKeyValue>
+      <_Driver>
+        <ServiceName>iaStor</ServiceName>
+        <Version>11.2.0.1006^</Version>
+      </_Driver>
+    </And>
+  </DetectInstall>
+  <Dependencies>
+    <And>
+      <_CPUAddressWidth>
+        <AddressWidth>32</AddressWidth>
+      </_CPUAddressWidth>
+      <_OS>
+        <OS>VS-BUS.*</OS>
+        <OS>VS-ENT.*</OS>
+        <OS>VS-HOMEBASIC.*</OS>
+        <OS>VS-HOMEPREM.*</OS>
+        <OS>VS-HOMEULT.*</OS>
+        <OS>WIN7-ENT.*</OS>
+        <OS>WIN7-HOMEBASIC.*</OS>
+        <OS>WIN7-HOMEPREM.*</OS>
+        <OS>WIN7-PRO.*</OS>
+        <OS>WIN7-STARTER.*</OS>
+        <OS>WIN7-ULT.*</OS>
+        <OS>WXP-PRO.SP3</OS>
+      </_OS>
+      <Or>
+        <_PnPID><![CDATA[PCI\VEN_8086&DEV_3B2F&CC_0106]]></_PnPID>
+        <_PnPID><![CDATA[PCI\VEN_8086&DEV_1C03&CC_0106]]></_PnPID>
+        <_PnPID><![CDATA[PCI\VEN_8086&DEV_1E03&CC_0106]]></_PnPID>
+      </Or>
+    </And>
+  </Dependencies>
+  <Files>
+    <Installer>
+      <File>
+        <Name>g1im15ww.exe</Name>
+        <CRC>D6FA0E684CF8E9B72A61C91E297CA632E24641A8</CRC>
+        <Size>545688</Size>
+      </File>
+    </Installer>
+    <Readme default="EN">
+      <File id="JP">
+        <Name>g1im15wj.txt</Name>
+        <CRC>209B31D920B5930D397F9EE15956CCA97EE69366</CRC>
+        <Size>16974</Size>
+      </File>
+      <File id="EN">
+        <Name>g1im15ww.txt</Name>
+        <CRC>008D28AA23B80A558C3702DFFAB2C461B827DF1B</CRC>
+        <Size>16119</Size>
+      </File>
+    </Readme>
+  </Files>
+</Package>

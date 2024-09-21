@@ -1,0 +1,83 @@
+
+[Disks]
+
+MSAS2K3 = "LSI MegaRAID SAS RAID Controller Driver (Windows XP-64)", \msas2k3.sys, \
+
+
+[Defaults]
+
+# This section lists the default selection for each 'required'
+# hardware component.  If a line is not present for a component,
+# the default defaults to the first item in the [<component_name>]
+# section (see below).
+#
+# <component_name> is one of computer, display, keyboard, mouse, scsi
+# <id> is a unique <within the component> string to be associated
+#   with an option.
+
+scsi = MSAS2K3
+
+
+
+[scsi]
+
+# This section lists the options available for a particular component.
+#
+# <id> is the unique string for the option
+# <description> is a text string, presented to the user in a menu
+# <key_name> gives the name of the key to be created for the component in
+#   HKEY_LOCAL_MACHINE\ControlSet001\Services
+
+
+MSAS2K3	= "LSI MegaRAID SAS RAID Controller Driver (Windows XP-64)", msas2k3
+
+
+
+
+[HardwareIds.scsi.MSAS2K3]
+
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10011000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10021000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10031000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10041000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_20041000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_20051000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_100C1000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_100D1000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10081000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0413&SUBSYS_10051000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0409&SUBSYS_10091000", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10811734", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10a31734", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_82871033", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10018086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10038086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_35008086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_35018086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_35048086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_34908086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_35078086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_30161054", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0411&SUBSYS_10088086", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0078", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0079", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0073", "msas2k3"
+MSAS2K3 = "PCI\VEN_1000&DEV_0060", "msas2k3"
+
+[Files.scsi.MSAS2K3]
+
+driver  = MSAS2K3, msas2k3.sys, msas2k3
+inf     = MSAS2K3, oemsetup.inf, msas2k3
+inf     = MSAS2K3, nodev.inf
+catalog = MSAS2K3, megasas2.cat
+
+
+[Config.msas2k3]
+value = "", Tag, REG_DWORD, 20
+
+
+
+
+
+
+

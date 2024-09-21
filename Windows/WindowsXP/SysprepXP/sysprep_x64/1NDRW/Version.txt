@@ -1,0 +1,8 @@
+Title: SAS RAID: PERC H710P Adapter for Precision Workstations,PERC H310/H710P for Precison Workstatior...
+Version: A00-00        WP0000007472
+OEM Name: 
+OEM Version: 5.1.119.64
+Computers: Precision: T3600, T5600, T7600
+OS: Windows XP x64 - Professional Client
+Languages: Japanese,Chinese Simplified,Spanish,Korean,French,Italian,Chinese Traditional,German,Swedish,English,Dutch,Br Portuguese
+Created: 6/19/2012

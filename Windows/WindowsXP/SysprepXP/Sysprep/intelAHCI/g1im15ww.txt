@@ -1,0 +1,409 @@
+                                                                   Revision : 02
+--------------------------------------------------------------------------------
+Software name      Intel Rapid Storage Technology Driver
+
+Support models     ThinkPad T410, T410i, T410s, T410si, T420, T420i, T420s,
+                            T420si, T430, T430i, T430s, T430si
+                   ThinkPad T510, T510i, T520, T520i, T530, T530i
+                   ThinkPad W510, W520, W530
+                   ThinkPad W701, W701ds
+                   ThinkPad X1, X1 Carbon
+                   ThinkPad X201, X201i, X201s, X201 Tablet, X220, X220i,
+                            X220 Tablet, X220i Tablet, X230, X230i, X230 Tablet,
+                            X230i Tablet
+
+Operating Systems  Microsoft Windows 7  32-bit
+                   Microsoft Windows Vista  32-bit
+                   Microsoft Windows XP  Professional SP3
+                   Microsoft Windows XP  Tablet PC Edition 2005 SP2, SP3
+
+                   Refer to marketing materials to find out what computer models
+                   support which Operating Systems.
+
+Version            11.2.0.1006
+
+Support devices    Intel 7 Series Chipset Family SATA AHCI Controller
+                   Intel 5 Series 6 Port SATA AHCI Controller
+                   Intel Mobile Express Chipset SATA AHCI Controller
+
+
+--------------------------------------------------------------------------------
+WHAT THIS PACKAGE DOES
+
+  This package installs the software (Storage driver) to enable the following
+  devices.
+
+  Device name in the Device Manager
+  -----------------------------------------------------
+  Intel(R) 7 Series Chipset Family SATA AHCI Controller
+  Intel(R) 5 Series 6 Port SATA AHCI Controller
+  Intel(R) Mobile Express Chipset SATA AHCI Controller
+
+  Refer to marketing materials to find out what computer models support which
+  devices.
+
+  If this package has been installed, updating (overwrite-installing) this
+  package will fix problems, add new functions, or expand functions as noted
+  below.
+
+  This program is language independent and can be used with any language system.
+
+
+--------------------------------------------------------------------------------
+CHANGES IN THIS RELEASE
+  Version 11.2.0.1006
+
+[Important updates]
+  Nothing.
+
+[New functions or enhancements]
+- Added support for ThinkPad X1 Carbon.
+- Device Driver Functionality Enhancement.
+
+[Problem fixes]
+  Nothing.
+
+
+--------------------------------------------------------------------------------
+DETERMINING WHICH VERSION IS INSTALLED
+
+
+ [Windows 7/Vista]
+
+  1. Click Start.
+  2. Right-click Computer, and then click Properties.
+  3. At the left pane, click Device Manager.
+  4. Double-click the IDE ATA/ATAPI controllers or Storage controllers category.
+  5. Double-click either of the following devices;
+       Intel(R) 7 Series Chipset Family SATA AHCI Controller
+       Intel(R) 5 Series 6 Port SATA AHCI Controller
+       Intel(R) Mobile Express Chipset SATA AHCI Controller
+  6. Click the Driver tab.
+  7. Check Driver Version.
+
+
+ [Windows XP]
+
+  1. Click Start.
+  2. Right-click My Computer, then click Properties.
+  3. Click the Hardware tab, and then click Device Manager.
+  4. Double-click the IDE ATA/ATAPI controllers or Storage controllers category.
+  5. Double-click either of the following devices;
+       Intel(R) 7 Series Chipset Family SATA AHCI Controller
+       Intel(R) 5 Series 6 Port SATA AHCI Controller
+       Intel(R) Mobile Express Chipset SATA AHCI Controller
+  6. Click the Driver tab.
+  7. Check Driver Version.
+
+
+--------------------------------------------------------------------------------
+NOTES
+
+- A Blue Screen error will come up on the Windows preload when these models boot
+  with "Compatible" mode instead of "AHCI" that is modified from the BIOS Setup/
+  Config/Serial SATA menu. This is caused by an absence of a compatible driver
+  on the Windows preload. Stay "AHCI" mode when you boot Windows preload.
+
+
+--------------------------------------------------------------------------------
+INSTALLATION INSTRUCTIONS
+
+Note:
+- If your computer runs satisfactorily now, it may not be necessary to update
+  the software. To determine if you should update the software, refer to the
+  Version Information section.
+
+
+Manual Install
+
+  This section assumes to use Internet Explorer and Windows Explorer.
+
+  Downloading file
+  1. Click once on the underlined file name. Once this is done, some pop-up
+     windows will appear.
+  2. Follow the instructions on the screen.
+  3. In the window to choose Run or Save, click Save.
+  4. Choose the folder you would like to download the file to and click Save.
+     A different window will appear and the download will begin and complete.
+     Once the download has completed, there may or may not be a message stating
+     that the download completed successfully.
+
+  Extracting file
+  5. Make sure to be logged on with an administrator account.
+  6. Locate the folder where the file was downloaded.
+  7. Locate the file that was downloaded and double-click it.
+  8. Follow the instructions on the screen.
+  9. In the Select Destination Location window, click Next. If you would like to
+     select a different folder, click Browse.
+ 10. In the Ready to Install window, click Install. All the necessary files will
+     be extracted to the folder selected in the step 9.
+ 11. Uncheck the checkbox next to "Install ..... now", and then click Finish to
+     complete extraction.
+
+  Delete the file saved in the step 4.
+
+  Installing files
+ 12. Click Start.
+ 13. [Windows 7/Vista]
+       Right-click Computer, and then click Properties. At the left pane, click
+       Device Manager.
+     [Windows XP]
+       Right-click My Computer, click Properties, click the Hardware tab, and
+       then click Device Manager.
+ 14. Double-click the IDE ATA/ATAPI controllers or Storage controllers category.
+ 15. Double-click either of the following devices.
+       Standard AHCI 1.0 Serial ATA Controller
+       Intel(R) 7 Series Chipset Family SATA AHCI Controller
+       Intel(R) 5 Series 6 Port SATA AHCI Controller
+       Intel(R) Mobile Express Chipset SATA AHCI Controller
+ 16. Click the Driver tab, then click Update Driver Software...
+ 17. Click Browse my computer for driver software.
+ 18. Click Browse..., then point to driver location specified in step 9.
+ 19. Make sure the checkbox next to "Include subfolders" is checked and click
+     Next.
+ 20. Click Close when the installation has completed.
+ 21. Click Yes to restart the computer.
+
+
+ [Windows XP]  CLEAN INSTALL
+
+  Before installing the operating system, install Intel Rapid Storage Technology
+  Driver, as follows:
+
+  Notes:
+  - Be sure to install Intel Rapid Storage Technology Driver before installing the
+    operating system. Otherwise your computer will not respond; it will only
+    display a blue screen.
+  - In RAID mode, the following procedures is the ONLY procedure to install
+    Windows XP successfully.
+
+  1. Attach a floppy disk drive to your computer.
+  2. Download Intel Rapid Storage Technology Driver from the Web site and extract
+     the driver to C:\DRIVERS\WIN\IRST and copy the driver to a floppy disk.
+  3. Make sure that SATA AHCI or RAID is enabled;
+     3-1. Power off the computer.
+     3-2. Power on the computer.
+     3-3. Press the F1 key to enter the BIOS Setup Utility when the "ThinkPad"
+          logo is seen on the screen. The BIOS Setup Utility menu will be
+          displayed. If a password prompt appears, type the correct password.
+     3-4. Select Config.
+     3-5. Select Serial ATA (SATA).
+     3-6. Make sure RAID* or AHCI is selected. (* ThinkPad W510 only)
+     3-7. Press the F3 key, and then press the F3 key to go back to main menu.
+  4. Make sure that Operating System can be installed from Windows XP CD;
+     4-1. Select Startup.
+     4-2. Select Boot.
+     4-3. In Boot Priority Order, set "ATAPI CD0:" to the top of the list, "1".
+     4-4. Press the F10 key to save the new setup, and then select Yes.
+          The computer will restart.
+  5. Insert the Windows XP CD into the optical drive, and restart the computer.
+  6. To install a third-party SCSI or RAID driver first, press F6.
+  7. When prompted, select S for Specify Additional Device.
+  8. When prompted, insert the floppy disk that you created in step 2, and press
+     Enter.
+  9. - If your system has Intel 7 Series Chipset Family SATA AHCI Controller,
+       select Intel(R) 7 Series Chipset Family SATA AHCI Controller, and press
+       Enter.
+     - If your system has Intel 5 Series 6 Port SATA AHCI Controller, select
+       Intel(R) 5 Series 6 Port SATA AHCI Controller, and press Enter.
+     - If you selected RAID mode, select Intel(R) ICH8M-E/ICH9M-E/5 Series SATA
+       RAID Controller, and press Enter.
+     - If your system has Intel Mobile Express Chipset SATA AHCI Controller,
+       select Intel(R) Mobile Express Chipset SATA AHCI Controller, and press
+       Enter.
+ 10. To continue the installation, press Enter again. Leave the floppy disk in
+     the drive until the next reboot; the software may need to be copied from
+     the floppy disk again when the files are copied during setup.
+ 11. Follow the instruction to complete the Operating System installation.
+
+
+  If you do not have a floppy disk drive, you can install Intel Rapid Storage
+  Technology Driver by the following alternative procedure (applicable to other
+  SATA settings except RAID):
+
+  NOTE:
+  If you select AHCI for Serial ATA (SATA) in the BIOS Setup Utility before
+  installing Intel Rapid Storage Technology Driver, your computer will not
+  respond; it will only display a blue screen.
+
+
+  1. Power off the computer.
+  2. Power on the computer.
+  3. Press the F1 key to enter the BIOS Setup Utility when the "ThinkPad" logo
+     is seen on the screen. The BIOS Setup Utility menu will be displayed. If a
+     password prompt appears, type the correct password.
+  4. Select Config.
+  5. Select Serial ATA (SATA).
+  6. Select Compatibility.
+  7. Press the F10 key to save the new setup, and then select Yes.
+  8. Restart the computer.
+  9. Install Windows XP and Service Pack 2.
+ 10. Download Intel Rapid Storage Technology Driver from the Web site and extract
+     the driver to C:\DRIVERS\WIN\IRST.
+ 11. Go to C:\DRIVERS\WIN\IRST\PREPARE, and double-click install.cmd.
+ 12. Power off and on the computer.
+ 13. Press the F1 key to enter the BIOS Setup Utility when the "ThinkPad" logo
+     is seen on the screen. The BIOS Setup Utility menu will be displayed. If a
+     password prompt appears, type the correct password.
+ 14. Select Config.
+ 15. Select Serial ATA (SATA).
+ 16. Select AHCI.
+ 17. Press the F10 key to save the new setup, and then select Yes. The computer
+     will reboot and Windows XP will start.
+ 18. The Welcome to the Found New Hardware Wizard appears. Click No, not this
+     time, and then click Next.
+ 19. Select Install from a list or specific location (Advanced), and then click
+     Next.
+ 20. Select Search for the best driver in these locations. Then select Include
+     this location in the search:, specify the path, C:\DRIVERS\WIN\IRST, and
+     click Next. The Completing the Found New Hardware Wizard appears.
+ 21. Click Finish.
+ 22. When the System Settings Change window appears, click Yes. The computer
+     restarts.
+
+
+ [Windows XP]  UPDATE INSTALL
+
+  1. Start Windows XP.
+  2. Click Start and Control Panel.
+  3. Click Performance and Maintenance and System.
+  4. Click Hardware tab.
+  5. Click Device Manager button.
+  6. Click the + mark to expand IDE ATA/ATAPI controllers or Storage controllers
+     category.
+  7. Right-click either of the following devices and then and click Properties;
+       Intel(R) 7 Series Chipset Family SATA AHCI Controller
+       Intel(R) 5 Series 6 Port SATA AHCI Controller
+       Intel(R) Mobile Express Chipset SATA AHCI Controller
+  8. Click Driver tab.
+  9. Click Update Driver button.
+ 10. Select No, not this time and click Next.
+ 11. Select Install from a list or specific location.
+ 12. Click Next button.
+ 13. Select Search for the best driver in these locations and Include this
+     location in the search.
+ 14. Click Browse button.
+ 15. Locate the driver folder and click OK button.
+ 16. Click Next button. The driver installation starts.
+ 17. Click Finish button when the installation completes.
+ 18. Click Close button.
+
+
+--------------------------------------------------------------------------------
+VERSION INFORMATION
+
+  The following versions have been released to date.
+
+  Package        Rev.  Issue Date
+  -----------    ----  ---------------
+  11.2.0.1006    02    2012/08/03
+  11.2.0.1006    01    2012/06/27
+  11.0.5.1001    01    2012/05/14
+  11.0.3.1002          For preload use
+  10.6.0.1002    01    2011/09/29
+  10.1.0.1008    05    2011/04/28
+  10.1.0.1008    04    2011/04/08
+  10.1.0.1008    03    2011/03/18
+  10.1.0.1008    02    2011/03/10
+  10.1.0.1008    01    2011/03/08
+   9.6.6.1001    01    2010/11/17
+   9.6.0.1014    01    2010/09/17
+   9.5.7.1002    02    2010/03/12
+   9.5.7.1002    01    2010/02/12
+   9.5.4.1001    03    2010/02/03
+   9.5.4.1001    02    2010/01/29
+   9.5.4.1001    01    2009/12/18
+   9.5.3.1001          Initial release
+
+  Note: Revision number (Rev.) is for administrative purpose of this README
+        document and is not related to software version. There is no need to
+        upgrade this software when the revision number changes.
+
+  To check the version of software, refer to the Determining which version is
+  installed section.
+
+
+Summary of Changes
+
+  Where: <   >        Package version number
+         [Important]  Important update
+         (New)        New function or enhancement
+         (Fix)        Correction to existing function
+
+<11.2.0.1006>
+- (New) Added support for ThinkPad X1 Carbon.
+
+<11.2.0.1006>
+- (New) Device Driver Functionality Enhancement.
+
+<11.0.5.1001>
+- (Fix) Fixed an issue where the computer with the SSD installed might hang with
+        an error code 0xD1 on blue screen after resuming normal operation from
+        standby/sleep state.
+
+<11.0.3.1002>
+- (New) Added suport for ThinkPad T430,T430i,T430s,T430si,T530,T530i,W530,X230,
+        X230i,X230 Tablet,X230i Tablet.
+
+<10.6.0.1002>
+- (Fix) Fixed an issue where the computer might hang with 0x9F blue screen.
+
+<10.1.0.1008>
+- (New) Added support for ThinkPad X1.
+
+<10.1.0.1008>
+- (New) Added support for ThinkPad X220,X220i,X220 Tablet,X220i Tablet.
+
+<10.1.0.1008>
+- (New) Added support for ThinkPad W520.
+
+<10.1.0.1008>
+- (New) Added support for ThinkPad T420s,T420si.
+
+<10.1.0.1008>
+- (New) Added support for ThinkPad T420,T420i,T520,T520i.
+- (New) Added support for Intel Mobile Express Chipset SATA AHCI Controller.
+
+<9.6.6.1001>
+- (Fix) Fixed an issue where the computer might hang with 0x9F blue screen.
+
+<9.6.0.1014>
+- (New) Device Driver Functionality Enhancement.
+
+<9.5.7.1002>
+- (New) Added suport for ThinkPad W701,W701ds.
+
+<9.5.7.1002>
+- (Fix) Fixed an issue where Windows XP did not boot with RAID Volume on SSD.
+
+<9.5.4.1001>
+- (New) Added suport for ThinkPad X201,X201i,X201s,X201 Tablet.
+- (Fix) Corrected support OS list.
+
+<9.5.4.1001>
+- (New) Added suport for ThinkPad T410i,T410s,T410si,T510i.
+
+<9.5.4.1001>
+- (New) Device Driver Functionality Enhancement.
+
+<9.5.3.1001>
+- (New) Initial release for ThinkPad T410,T510,W510.
+
+
+--------------------------------------------------------------------------------
+LIMITATIONS
+
+  Nothing.
+
+
+--------------------------------------------------------------------------------
+TRADEMARKS
+
+* Lenovo and ThinkPad are registered trademarks of Lenovo.
+
+* Intel is a registered trademark of Intel Corporation.
+* Microsoft, Windows and Windows Vista are registered trademarks of Microsoft
+  Corporation.
+
+Other company, product, and service names may be registered trademarks,
+trademarks or service marks of others.

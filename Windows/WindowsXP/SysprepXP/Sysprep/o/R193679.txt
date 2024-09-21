@@ -1,0 +1,172 @@
+Dell SAS 5 and SAS 6 Controller 
+Device Driver for Windows XP 
+
+Version 1.28.03.01
+
+
+TABLE OF CONTENTS
+=================
+
+1.0  Introduction
+2.0  Compatibility / Minimum Requirements
+3.0  Install Instructions
+     3.1  Installing the Driver During Operating System Installation
+     3.2  Installing a Windows Driver for a New SAS Controller
+     3.3  Updating an Existing Windows Driver
+4.0  Fixes or Enhancements in this Release
+5.0  Additional Information
+6.0  Known Issues 
+
+
+1.0 Introduction
+================
+
+This is the driver for following controllers:
+ 
+    SAS 5 Controllers
+    SAS 6 Controllers
+
+
+2.0 Compatibility / Minimum Requirements
+========================================
+
+This device driver requires the following minimum Operating System level:
+
+Windows XP, Service Pack 2 (SP2)
+
+Minimum SAS 5 FW package version: 00.10.51.00.06.12.05.00
+Minimum SAS 6 FW package version: 00.25.45.00.06.22.02.00
+
+
+3.0 Install Instructions
+========================
+
+This driver package contains the Windows device driver 
+for the SAS 5 and SAS 6 controllers.
+
+To build the installation media these files should be 
+copied to a blank floppy diskette or USB key.
+
+3.1 Installing the Driver during Operating System Installation
+--------------------------------------------------------------
+
+1. Power on the system and boot to the Microsoft Windows XP CD.
+2. When the message "Press F6 if you need to install a third 
+   party SCSI and RAID driver" appears, press the <F6> key 
+   immediately. Within a few minutes, a screen will appear 
+   asking for the driver to support the additional controllers 
+   in the system.
+3. Press the <S> key
+   The system prompts for the driver diskette to be inserted.
+4. Insert the driver diskette in the floppy drive (or the USB key 
+   in the USB port) and press the <Enter> key.
+   A list of SAS drivers will appear.
+5. Select the appropriate driver for the installed controller and 
+   OS and press the <Enter> key to load the driver.
+6. Press the <Enter> again key again to continue with the 
+   installation process.
+
+
+3.2 Installing a Windows Driver for a New SAS Controller
+--------------------------------------------------------
+
+Perform the following steps to configure the driver when you add 
+a new controller to a system that already has Windows installed.
+
+1. Power down the system.
+2. Install the new SAS controller in the system.
+   Refer to Hardware Installation for detailed instructions on installing 
+   and cabling the SAS controller in the system.
+3. Power on the system.
+   The Windows operating system should detect the new controller and 
+   display a message to inform the user.
+4. The Found New Hardware Wizard screen will pop up and display the 
+   detected hardware device.
+5. Click on Next.
+6. On the Locate Device Driver screen, select Search for a suitable 
+   driver for my device and click on Next.
+7. Insert the appropriate driver diskette or USB key and select that 
+   device on the Locate Driver Files screen.
+8. Click on Next.
+9. The wizard detects and installs the appropriate device drivers for 
+   the new controller.
+10.Click on Finish to complete the installation.
+11.Reboot the system.
+
+
+3.3 Updating an Existing Windows Driver
+---------------------------------------
+
+Perform the following steps to update the Windows driver for a new 
+controller already installed on your system.
+
+NOTE: It is important that you put your system on idle before you 
+update the driver.
+
+1. Press Start > Control Panel > System.
+   The System Properties screen will be displayed.
+2. Click on the Hardware tab.
+3. Click on Device Manager and the Device Manager screen will be 
+   displayed.
+4. Click on SCSI and RAID Controllers.
+5. Double-click on the controller for which you want to update 
+   the driver.
+6. Click on the Driver tab and click on Update Driver.
+   The Upgrade Device Driver Wizard will be displayed.
+7. Insert the appropriate driver diskette or USB key. 
+   NOTE: The driver files can also be copied to the hard drive.
+8. Click on Next.
+9. Follow the steps in the Wizard to browse for the new driver.
+10.Select the driver.
+11.Click on Next and continue with the installation steps in the 
+   Wizard.
+12.Click on Finish to exit the wizard and reboot the system for 
+   the changes to take effect.
+
+
+4.0 Fixes or Enhancements in this Release 
+=========================================
+
+- Force OS bus rescan after any F/W fault, to detect unreported volumes 
+  changes prior to the fault.
+- Add functionality to detect and properly associate existing volumes with 
+  new/deleted hotspares.
+- Check for inactive/active volume status before presenting the volume to 
+  the OS.
+- Improve handshake negotiations on drive hotplug activities.
+- Log system event error when the Persistency Table is full.
+- Changes on the F/W download activity to reduce impact to users.
+- Increased timeout for FW download.
+- Added support for detecting dual port SAS drives or detecting SATA drives 
+  behind a port selector
+- General improvements on error detection and task management functions:
+	. Improve handling of bus change requests (pause/resume/detect)
+	. Better error detection for SAS tape environments
+	. Better handling of NULL SRB's
+	. Send Diag Reset instead of Message Unit Reset if a stuck LUN or 
+          Target Reset condition occurs
+	. Fixed malformed bad reply messages
+	. Improvements in driver reset & escalated reset handling
+	. Improvements handling error returns from FW
+- Added reset queue to execute resets for different target/LUNs in the 
+  order received.
+- Added detection of Task Aborted SCSI status returned from target to force a 
+  retry by the Windows port driver, MPIO, or the Disk class driver and avoid 
+  potential data corruption on Write.  Problem limited to some multi-initiator 
+  RBOD configurations.
+	
+
+5.0 Additional Information
+==========================
+
+The Driver version may be displayed in a different manner depending on 
+the application because the leading zeros are often trimmed and not shown. 
+(i.e.: 1.24.04.00 may be displayed as 1.24.4.0).
+
+
+6.0 Known Issues
+================
+
+None.  
+
+
