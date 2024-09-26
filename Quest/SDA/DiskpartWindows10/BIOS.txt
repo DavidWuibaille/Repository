@@ -1,0 +1,7 @@
+select disk 0
+clean
+create partition primary
+select partition 1
+active
+assign
+exit
