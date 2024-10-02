@@ -1,0 +1,35 @@
+FILES INCLUDED IN THIS PACKAGE:  
+
+BCUsignature32.dll
+BCUsignature64.dll
+Bios Flash.htm         (How to Use documentation)
+History.txt            (Softpaq release history)
+HPFIRMWAREUPDREC.exe
+HPFIRMWAREUPDREC64.exe
+HPFIRMWAREUPDREC.txt
+HpqPswd.exe
+HpqPswd64.exe
+HpqPswd.txt
+logo.bmp
+contents.txt           (this file)
+license.txt            (copy of Softpaq license text)
+T76_xxxxxx.bin         (firmware image file)
+T76_xxxxxx.inf         (firmware install map)
+T37_xxxxxx.bin         (firmware image file)
+T37_xxxxxx.inf         (firmware install map)
+
+HpFirmwareUpdRec.exe   - A utility to locally update the system firmware on 
+                         individual systems in Microsoft Windows.
+
+HpFirmwareUpdRec64.exe - 64-bit version of HpFirmwareUpdRec.exe
+
+
+HPQ Password Utility   - HPQPswd is a utility for saving a BIOS Setup Password to 
+                         an encrypted file. This file is provided to HP firmware update 
+                         utilities for automated scripting to avoid user prompting.
+
+
+Copyright (c) 2020 HP Development Company, L.P.
+
+Product names mentioned herein may be trademarks and/or registered trademarks 
+of their respective companies.

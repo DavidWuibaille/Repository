@@ -1,0 +1,170 @@
+			Revision History
+			T76 ROM Family
+
+Models Supported:	HP EliteBook 830 G8 Notebook PC
+			HP EliteBook 840 G8 Notebook PC
+			HP EliteBook 850 G8 Notebook PC
+			HP ZBook Firefly 14 inch G8 Mobile Workstation PC
+			HP ZBook Firefly 15.6 inch G8 Mobile Workstation PC
+			HP EliteBook 840 Aero G8 Notebook PC
+
+- Provides the following drivers and firmware:
+T76
+Cypress Power Delivery (PD) Firmware (CCG6), version 2.5.0
+EC/SIO Firmware, version 30.37.00
+Intel GOP EFI Driver, version 17.0.1053
+Management Engine (ME) Firmware, version 15.0.35.1951
+T37
+EC/SIO Firmware, version 58.01.00(TI PD : v7.4)
+Intel GOP EFI Driver, version 17.0.1053
+Management Engine (ME) Firmware, version 15.0.35.1951
+
+Version 01.08.20
+
+ENHANCEMENTS:  
+- Enhancement to address security vulnerabilities CVE-2022-23924, CVE-2022-23925, CVE-2022-23926, CVE-2022-23927, CVE-2022-23928, CVE-2022-23929, CVE-2022-23930, CVE-2022-23931, CVE-2022-23932, CVE-2022-23933, CVE-2022-23934.
+- Enhancement to address security vulnerabilities CVE-2022-23953, CVE-2022-23954, CVE-2022-23955, CVE-2022-23956, CVE-2022-23957, CVE-2022-23958.
+- Adds a feature to control display of BIOS Admin login based on ""BIOS Administrator visible at power-on authentication"" when Enhanced BIOS Authentication Mode (EBAM) is set.
+
+FIXES:
+- Fixes issue where system failure to boot after switching between two different saved bootstores.
+ 
+PCR0 (TPM2.0) = T76 : 347A7153B67EFD154D50053731DABEDD0C6FC57D69CDEA90D83FC61F50F038FE
+                T37 : 9646D40EA7EFF6A91DA5671049DD5F7B7D27FB1526030AB078EC033CC39DA1EE
+
+Version 01.08.00
+
+ENHANCEMENTS:  
+- Addresses security vulnerabilities CVE-2021-39297, CVE-2021-39299, CVE-2021-39300, CVE-2021-39301.
+- Updates the splash screen with Protected by Sure Start bitmaps.
+- Updates the Intel Thunderbolt retimer firmware to version 2.25.1.1.
+- Provides support for the  Hynix 32GB memory module.
+- Provides support for the Realtek audio codec.
+
+FIXES:
+- Fixes an issue where the system displays the incorrect unlock screen message when the system screen is locked.
+- Fixes an issue where system battery does not recharge properly through the HP Thunderbolt Dock G4r.
+- Fixes an issue where a system that attempts to update firmware via FTP server with proxy from the F10 setup interface reports the error, Failure during data transfer (maximum downloaded content size exceeded). 
+- Fixes an issue where an unsupported Thunderbolt Dock is displayed in the BIOS Config Utility.
+- Fixes an issue where the audio replay volume is lower than expected after the BIOS is updated.
+ 
+PCR0 (TPM2.0) = 70EE7804465E4706A4C891043A17448835886BC11BBAE74BCD94E935DFBFBBA8
+
+Version 01.07.02
+
+ENHANCEMENTS:  
+- Enhancement to address security vulnerabilities CVE-2021-0145. 
+- Enhancement to address security vulnerabilities CVE-2021-0157, CVE-2021-0156. 
+- Enhancement to address security vulnerabilities CVE-2021-0107, CVE-2021-0111, CVE-2021-0114, CVE-2021-0115, CVE-2021-0116, CVE-2021-0117, CVE-2021-0118, CVE-2021-0119, CVE-2021-0124, CVE-2021-0125. 
+- Update camera Firmware Management to enhance camera firmware flash stability 
+- Update HP Sure Run Agent to v5.0.0.26569 for compatibility and stability enhancement.
+- Adds Windows11 operating system support.
+- Enhancement to address security vulnerabilities CVE-2021-0107, CVE-2021-0111, CVE-2021-0114, CVE-2021-0115, CVE-2021-0116, CVE-2021-0117, CVE-2021-0118, CVE-2021-0119, CVE-2021-0124, CVE-2021-0125. 
+- Enhancement to address security vulnerabilities CVE-2021-33113, CVE-2021-33115. 
+- Correct help string for F10 "Special Keys mapped to Fn+Keypress"  
+- Correct POST error message for "300-Confguration change warning" on Traditional Chinese 
+
+FIXES:
+- Fixes an issue where Thunderbolt grahpic card doesn’t work properly after restarting unit. 
+- Fixes an issue where can't adjust brightness by FN+F3/F4 when Privacy Panel brightness turned on in F10 
+- Fixes an issue where charge LED  from amber change to white when battery charging to 88% 
+- Fixes an issue where it showes yellow bang in device manager on UCSI item. 
+- Fixes an issue where mobile hotspot doesn’t work properly when a device connects to 5GHz channel. 
+- Fixes issue where HP Sure Run failure to enable with error message "Operation failed with the following error code:4" when "Remote Device Management" permanently disabled. 
+- Fixes issue where option in F10 setup menu does not match option get from BIOS Configuration Utility when HP Cloud Managed is permanently disabled.
+- Fixes issue where some F10 settings or help message display incomplete when change to non-English language." 
+- Fixes an issue where HP logo doesn't appear when system triggers ME recovery. 
+ 
+PCR0 (TPM2.0) = 2A382FFFAA90861C18C45568BDFB25A7EDA5915D6561DACA2689EBA7EE17378A
+
+Version 01.06.02
+
+ENHANCEMENTS:  
+- Addresses security vulnerabilities CVE-2021-0072, CVE-2021-0161, CVE-2021-0164, CVE-2021-0165, CVE-2021-0166, CVE-2021-0168, CVE-2021-0170, CVE-2021-0076, CVE-2021-0183.
+- Updates the power-on battery warning message when the battery capacity is low.
+- Updates the battery capacity icon display when Maximize My Battery Health is set in the F10 settings and the battery is fully charged.
+- Provides support for the Apple USB-C 87W adaptor.
+- Provides support for a new camera module.
+- Updates the Realtek USB UEFI PXE driver to v2.035.
+- Updates HP Sure Run Service Agent to enhance compatibility and stability.
+- Delays the response of the power button on the keyboard to avoid accidental activation of the power button during sanitization mode while HP Easy Clean is used.
+- Provides support for the Soft Start feature.
+- Provides support for the Apple XDR display.
+- Updates the Intel reference code to provide enhanced stability and compatibility.
+- Adds support for a new memory module.
+- Improves power management on systems running multiple Type-C ports.
+
+NOTE: Due to the enhanced security features included in this update, the BIOS cannot be downgraded to an earlier version after this package is installed.
+
+FIXES:  
+- Fixes an issue on a system with Sure Admin enabled where the Power-On Password cannot be cleared after the defaults are restored using Restore Security Settings to Factory Defaults.
+- Fixes an issue where the CTRL+ALT+Insert key combination does not function in the Fn unlock mode.
+- Fixes an issue where the current and new version numbers in the HP Firmware Update and Recovery tool are reversed.
+- Fixes an issue where the touchscreen does not function in the F10 menu. 
+- Fixes issue where the HP Sure Recover page is not displayed correctly in the F10 setup menu after the display language is changed to a non-English language.
+- Fixes an issue where the system cannot charge the battery when battery is in shipping mode.
+- Fixes an issue where the HP Thunderbolt G2 dock disconnects from the system unexpectedly.
+  
+PCR0 (TPM2.0) = 9E4BD2BEE9B44D6E74744FA8BCE34B946E6B0BD0ECAA3C0727762D52EE2ABB1D
+
+Version 01.04.01
+
+ENHANCEMENTS:  
+- Addresses security vulnerabilities CVE-2021-0069, CVE-2021-0071, and CVE-2021-0075.
+- Addresses security vulnerabilities CVE-2020-12359.
+- Addresses security vulnerabilities CVE-2020-8700, CVE-2020-8703, CVE-2020-24507 and CVE-2020-24516.
+- Addresses security vulnerabilities CVE-2020-24489, CVE-2020-24511, and CVE-2020-24512.
+- Improves Customer Experience when a 3rd party device is used to charge the system through the USB-C port.
+- Updates the UEFI Wi-Fi Driver to version 1.2.4.2193 to enhance connection stability in the pre-boot environment.
+- Adds camera firmware update capability for additional supported camera devices.
+- Improves the performance of the clickpad firmware update process.
+- Enhances cursor movement when the clickpad is used.
+- Enhances cursor movement when a Bluetooth mouse is used.
+- Provides enhanced stability when an external monitor is connected to the system using an HP USB-C Dock G5.
+- Updates the Intel Sensor Hub firmware to version 5.4.300.4468.
+
+FIXES:  
+- Fixes an issue where the keyboard Fn key LED does not power off when the system is in hibernation.
+- Fixes an issue on a system connected to an HP dock that enters hibernation where the system restarts or shuts down during Wake on LAN.
+- Fixes an issue that occurs on a system connected to an external monitor using an HP Docking station where the speaker on the monitor does not function properly function after the system resumes from a hibernate or system off state while the lid is closed.
+- Fixes an issue on a system with the lid closed where the system cannot power on with external monitor connected though HP Docking station.
+
+PCR0 (TPM2.0) = 4A0024313F0A692D5D4ED2F8C2BFC2425B758C8AC87AD22403DE0D42582367F7
+
+
+Version 01.01.32
+
+- Fixes an issue where a system connected to a dock monitor stops functioning (hangs) when a BIOS update is performed.
+
+- Fixes an issue where an external monitor connected to the system using VGA or DisplayPort displays a black screen after the system is powered on (cold boot) while the lid is closed and BitLocker is enabled. 
+
+- Fixes an issue where the F1 through F12 keys do not function properly.
+
+- Fixes an issue where the system cannot boot to PXE from an IPv4/IPV6 network after Custom/system address is enabled in the F10 menu.
+
+- Fixes an issue which causes an error to occur when the HP Sure Admin QR Code is used on a system when Intel AMT (Active Management Technology) is disabled and Pre-boot WiFi is enabled.
+
+- Fixes an issue where the SSD ID string is incomplete in Secure Erase in the F10 menu.
+
+- Fixes an issue where system continues to boot to the USB recovery partition and not the USB image partition after the USB drive is selected from the boot menu.
+
+- Fixes an issue where the system does not boot successfully after the A/C power adapter is disconnected from the system during a capsule BIOS update on EMMC systems.
+
+- Improves the resume time from Modern Standby time when the system is running in DC mode.
+
+- Improves the Modern Standby (MSC) experience when the system transitions from AC to DC power mode while the lid is closed.
+
+- Enables the second source ELAN Clickpad Firmware update. 
+
+- Enables Brightness hotkey support for Linux Ubuntu.
+
+- Adds the Permanent Configuration of Boot Order for external network devices.
+
+- Limits system power when the system is running in DC mode and the battery temperature is below 10C.
+
+PCR0 (TPM2.0) = 48A46D5C8AD10C3F55E5A1423C700CC519A0A4F1902EAC2C5EC20DE3C6187BD5
+
+
+Version 01.01.04
+
+PCR0 (TPM2.0) = 8D09D72E59E783817DD6847FECDA9CFE2B8C8B71DEEE02472555271ADB1AA69E

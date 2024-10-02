@@ -1,0 +1,57 @@
+
+; Copyright (C) 2022 HP Development Company. L.P.  All Rights Reserved.
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %Provider%
+Class       = Firmware
+ClassGuid   = {f2e7dd72-6468-4e36-b6f1-6488f42c1b52}
+DriverVer   = 03/11/2022,1.8.20.0
+CatalogFile = T76_01082000.cat
+PnpLockdown = 1
+
+[Manufacturer]
+%MfgName% = Firmware,NTx86, NTamd64, NTarm
+
+[Firmware.NTx86]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{563e71f8-8344-418c-a722-9b55c56997e5}
+
+[Firmware.NTamd64]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{563e71f8-8344-418c-a722-9b55c56997e5}
+
+[Firmware.NTarm]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{563e71f8-8344-418c-a722-9b55c56997e5}
+
+[Firmware_Install.NT]
+CopyFiles = Firmware_CopyFiles
+
+[Firmware_CopyFiles]
+T76_01082000.bin
+
+[Firmware_Install.NT.Hw]
+AddReg = Firmware_AddReg
+
+[Firmware_AddReg]
+HKR,,FirmwareId,,{563e71f8-8344-418c-a722-9b55c56997e5}
+HKR,,FirmwareVersion,%REG_DWORD%,0x01081400
+HKR,,FirmwareFilename,,{563e71f8-8344-418c-a722-9b55c56997e5}\T76_01082000.bin
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+T76_01082000.bin = 1
+
+[DestinationDirs]
+DefaultDestDir = %DIRID_WINDOWS%,Firmware\{563e71f8-8344-418c-a722-9b55c56997e5} ; %SystemRoot%\Firmware
+
+[Strings]
+; localizable
+Provider     = "HP Inc."
+MfgName      = "HP Inc."
+FirmwareDesc = "HP T76 System Firmware"
+DiskName     = "Firmware Update"
+
+; non-localizable
+DIRID_WINDOWS = 10
+REG_DWORD     = 0x00010001

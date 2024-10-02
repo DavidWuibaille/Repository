@@ -1,0 +1,81 @@
+HP Firmware Update and Recovery
+
+The purpose of the HP Firmware Update and Recovery Utility is to provide a method for end-users 
+to update the system BIOS, ME (Intel only), and other supported firmware on a system running MS Windows.
+
+NOTES:
+     1. [Path]\HPFIRMWAREUPDREC -? will display the available options for this utility.
+     
+     2. If the system has a BIOS Setup password enabled, then HPFIRMWAREUPDREC will prompt
+        for the password to be entered before completing the update process.
+
+USAGE:
+  
+     1. Close all other applications before launching HPFIRMWAREUPDREC. The system will
+        restart to apply the update.
+
+     2. Open the folder containing the application and firmware binary file.  Double-click
+        on the HPFIRMWAREUPDREC icon. 
+
+     3. HPFIRMWAREUPDREC will inform the user that a firmware update is about to occur.
+
+     4. The version of the firmware image in the binary file and the version of the 
+        current system firmware are displayed. Once OK is selected the system will restart 
+        to begin the update process.
+
+     5. Upon completion, the user is notified that the firmware update was successful.
+        Select Restart.
+
+     6. On restart, you may see the firmware performing the final update, and the system
+        may reset several times before loading the operating system.
+
+     7. When the system starts Windows, the system firmware update is complete.
+
+
+ADVANCED USAGE:
+
+     1. Close all other applications before launching HPFIRMWAREUPDREC.
+
+     2. On the Windows Task Bar select Start, then Run, and enter 
+        the following on the command line:
+        [Path]\HPFIRMWAREUPDREC -f[bin file]
+
+     3. HPFIRMWAREUPDREC will inform the user that a firmware update is about to occur.
+
+     4. The version of the firmware image in the [bin file] and the version of the 
+        current system firmware are displayed. Once OK is selected the system will
+        restart to begin the update process.
+
+     5. Upon completion, the user is notified that the firmware update was successful.
+        Select Restart.
+
+     6. On restart, you may see the firmware performing the final update, and the system
+        may reset several times before loading the operating system.
+
+     7. When the system starts Windows, the system firmware update is complete.
+
+
+
+Command Line Options
+
+
+-fBIN-file      Specifies the path to the .BIN image file, and does not change the “working
+                directory?from the location of the utility. Default is *.BIN in the executable
+                folder. Valid with all other options.
+
+-ppassword-file Specify encrypted password file created with the HpqPswd utility. Valid with
+                all other options.
+
+-s              Silent mode. Suppresses all output.
+
+-b              If BitLocker with TPM is in use, automatically suspend it.
+
+-?              Show the same usage dialog that appears if an invalid command line is detected.
+                This options overrides all other options, including -s.
+
+
+Copyright (c) 2020 HP Development Company, L.P.
+
+
+Product names mentioned herein may be trademarks and/or registered trademarks 
+of their respective companies.

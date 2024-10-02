@@ -1,0 +1,57 @@
+
+; Copyright (C) 2022 HP Development Company. L.P.  All Rights Reserved.
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %Provider%
+Class       = Firmware
+ClassGuid   = {f2e7dd72-6468-4e36-b6f1-6488f42c1b52}
+DriverVer   = 03/13/2022,1.8.20.0
+CatalogFile = T37_01082000.cat
+PnpLockdown = 1
+
+[Manufacturer]
+%MfgName% = Firmware,NTx86, NTamd64, NTarm
+
+[Firmware.NTx86]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{ea11c3ed-db24-4c6b-bede-4940ea19cb84}
+
+[Firmware.NTamd64]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{ea11c3ed-db24-4c6b-bede-4940ea19cb84}
+
+[Firmware.NTarm]
+%FirmwareDesc% = Firmware_Install,UEFI\RES_{ea11c3ed-db24-4c6b-bede-4940ea19cb84}
+
+[Firmware_Install.NT]
+CopyFiles = Firmware_CopyFiles
+
+[Firmware_CopyFiles]
+T37_01082000.bin
+
+[Firmware_Install.NT.Hw]
+AddReg = Firmware_AddReg
+
+[Firmware_AddReg]
+HKR,,FirmwareId,,{ea11c3ed-db24-4c6b-bede-4940ea19cb84}
+HKR,,FirmwareVersion,%REG_DWORD%,0x01081400
+HKR,,FirmwareFilename,,{ea11c3ed-db24-4c6b-bede-4940ea19cb84}\T37_01082000.bin
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+T37_01082000.bin = 1
+
+[DestinationDirs]
+DefaultDestDir = %DIRID_WINDOWS%,Firmware\{ea11c3ed-db24-4c6b-bede-4940ea19cb84} ; %SystemRoot%\Firmware
+
+[Strings]
+; localizable
+Provider     = "HP Inc."
+MfgName      = "HP Inc."
+FirmwareDesc = "HP T37 System Firmware"
+DiskName     = "Firmware Update"
+
+; non-localizable
+DIRID_WINDOWS = 10
+REG_DWORD     = 0x00010001
