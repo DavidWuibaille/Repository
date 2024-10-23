@@ -1,1 +1,0 @@
-cscript ghostauto.vbs
