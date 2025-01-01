@@ -178,3 +178,59 @@ function InstallDrivers {
         Write-Host "Erreur lors de l'injection des pilotes : $_" -ForegroundColor Red
     }
 }
+
+
+function SetDns {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string[]]$DnsServers # Liste des serveurs DNS à configurer
+    )
+
+    # Étape 1 : Détecter la carte réseau active
+    Write-Host "Détection de la carte réseau active..." -ForegroundColor Cyan
+    $ActiveCard = ""
+    $AllCards = Get-NetAdapter
+
+    foreach ($Card in $AllCards) {
+        if (($Card.Status -eq "Up") -and ($Card.Name -notlike "*VMware*")) {
+            if (($ActiveCard -eq "") -or ($ActiveCard -like "*wi")) {
+                $ActiveCard = $Card.Name
+            }
+        }
+    }
+
+    if ($ActiveCard -eq "") {
+        Write-Host "Aucune carte réseau active détectée." -ForegroundColor Red
+        return
+    }
+
+    Write-Host "Carte réseau active détectée : $ActiveCard" -ForegroundColor Green
+
+    # Étape 2 : Obtenir l'index de l'interface pour la carte réseau active
+    Write-Host "Récupération de l'index de l'interface pour $ActiveCard..." -ForegroundColor Cyan
+    $ActiveCardIndex = ""
+    $IPInterfaces = Get-NetIPInterface
+
+    foreach ($IPInterface in $IPInterfaces) {
+        if (($IPInterface.InterfaceAlias -eq $ActiveCard) -and ($IPInterface.AddressFamily -eq "IPv4")) {
+            $ActiveCardIndex = $IPInterface.ifIndex
+        }
+    }
+
+    if ($ActiveCardIndex -eq "") {
+        Write-Host "Impossible de récupérer l'index de l'interface pour $ActiveCard." -ForegroundColor Red
+        return
+    }
+
+    Write-Host "Index de l'interface pour $ActiveCard : $ActiveCardIndex" -ForegroundColor Green
+
+    # Étape 3 : Configurer les serveurs DNS
+    Write-Host "Configuration des serveurs DNS : $($DnsServers -join ', ')" -ForegroundColor Cyan
+    try {
+        Set-DnsClientServerAddress -InterfaceIndex $ActiveCardIndex -ServerAddresses $DnsServers
+        Write-Host "Les serveurs DNS ont été configurés avec succès." -ForegroundColor Green
+    } catch {
+        Write-Host "Erreur lors de la configuration des serveurs DNS : $_" -ForegroundColor Red
+    }
+}
+
