@@ -98,7 +98,7 @@ function Get-ComputerInfoFromAPI {
 function InstallDrivers {
     # Tableau de correspondance modèle <-> URL de téléchargement
     $DriverUrls = @{
-        "Dell Latitude 5410" = "https://example.com/drivers/Latitude_5410.zip"
+        "HP EliteBook 840 G3" = "https://nas.wuibaille.fr/DML/DRIVERS/HP%20EliteBook%20840%20G3.zip"
         "Dell Latitude 7420" = "https://example.com/drivers/Latitude_7420.cab"
         "HP EliteBook 850 G8" = "https://example.com/drivers/EliteBook_850_G8.zip"
     }
