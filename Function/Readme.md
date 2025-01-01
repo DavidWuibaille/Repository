@@ -4,7 +4,7 @@ This repository contains useful PowerShell functions that can be directly loaded
 
 ## How to Use
 
-You can load the functions defined in `global.ps1` directly into your PowerShell session or scripts by using the following command:
+You can load the functions defined  directly into your PowerShell session or scripts by using the following command:
 
 ```powershell
 # Charger et exécuter le script Packaging.ps1 depuis l'URL brute
