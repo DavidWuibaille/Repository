@@ -45,7 +45,7 @@ function Log-Message {
         if (-not (Test-Path -Path "C:\Systools"))        { New-Item -Path "C:\Systools" -ItemType Directory } 
         if (-not (Test-Path -Path "C:\Systools\OptLog")) { New-Item -Path "C:\Systools\OptLog" -ItemType Directory }
     }
-    $logFilePath = "C:\Systools\OptLog\provision.log"
+    $logFilePath = "C:\Systools\OptLog\Tanium.log"
 
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "$timestamp - $message"
