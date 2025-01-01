@@ -7,8 +7,9 @@ This repository contains useful PowerShell functions that can be directly loaded
 You can load the functions defined in `global.ps1` directly into your PowerShell session or scripts by using the following command:
 
 ```powershell
-# URL of the script
-$url = "https://raw.githubusercontent.com/DavidWuibaille/Repository/main/Function/global.ps1"
+# Charger et exécuter le script Packaging.ps1 depuis l'URL brute
+. ([scriptblock]::Create((Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DavidWuibaille/Repository/main/Function/Packaging.ps1").Content))
 
-# Load and execute the script in the current session
-. ([scriptblock]::Create((Invoke-WebRequest -Uri $url).Content))
+# Charger et exécuter un autre script global.ps1 (par exemple)
+. ([scriptblock]::Create((Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DavidWuibaille/Repository/main/Function/global.ps1").Content))
+
