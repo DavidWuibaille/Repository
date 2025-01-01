@@ -71,10 +71,6 @@ function Get-ComputerInfoFromAPI {
     }
 
     # Construire l'URL de la requête
-    write-host "-----ggg---------"
-     write-host "$WebServiceUrl"
-      write-host "?macaddress="
-       write-host "$macAddresses"
     $urlws = "$WebServiceUrl?macaddress=$macAddresses"
     Log-Message "URL construite : $urlws"
 
