@@ -59,7 +59,7 @@ function Get-ComputerInfoFromAPI {
         [Parameter(Mandatory = $true)]
         [string]$WebServiceUrl # URL du service web
     )
-
+write-host $WebServiceUrl
     # Obtenir l'adresse MAC de l'interface réseau active
     try {
         $macAddresses = Get-WmiObject Win32_NetworkAdapter | Where-Object { $_.NetConnectionStatus -eq 2 } | Select-Object -ExpandProperty MACAddress
