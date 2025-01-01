@@ -34,3 +34,14 @@ function TaniumDownloadAndInstallMsi {
         exit 1
     }
 }
+
+
+# Function to log messages
+function Log-Message {
+    param (
+        [string]$message
+    )
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logMessage = "$timestamp - $message"
+    Add-Content -Path $logFilePath -Value $logMessage
+}
