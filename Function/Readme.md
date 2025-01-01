@@ -1,13 +1,14 @@
-Étape 1 : Charger un script
-Choisissez le script que vous souhaitez charger et exécutez la commande correspondante dans votre terminal PowerShell.
+# PowerShell Functions: Global.ps1
 
-Charger les fonctions globales :
+This repository contains useful PowerShell functions that can be directly loaded into your scripts or PowerShell session from the provided URL.
 
-powershell
-Copier le code
-. ([scriptblock]::Create((Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DavidWuibaille/Repository/main/Function/global.ps1").Content))
-Charger les fonctions de packaging :
+## How to Use
 
-powershell
-Copier le code
-. ([scriptblock]::Create((Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DavidWu
+You can load the functions defined in `global.ps1` directly into your PowerShell session or scripts by using the following command:
+
+```powershell
+# URL of the script
+$url = "https://raw.githubusercontent.com/DavidWuibaille/Repository/main/Function/global.ps1"
+
+# Load and execute the script in the current session
+. ([scriptblock]::Create((Invoke-WebRequest -Uri $url).Content))
