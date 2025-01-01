@@ -71,7 +71,7 @@ function Get-ComputerInfoFromAPI {
     }
 
     # Construire l'URL de la requête
-    $urlws = "$WebServiceUrl?macaddress=$macAddresses"
+    $urlws = $WebServiceUrl + "?macaddress=" + $macAddresses
     Log-Message "URL construite : $urlws"
 
     # Appeler l'API et récupérer les informations
