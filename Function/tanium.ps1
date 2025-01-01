@@ -95,3 +95,86 @@ function Get-ComputerInfoFromAPI {
     }
 }
 
+function InstallDrivers {
+    # Tableau de correspondance modèle <-> URL de téléchargement
+    $DriverUrls = @{
+        "Dell Latitude 5410" = "https://example.com/drivers/Latitude_5410.zip"
+        "Dell Latitude 7420" = "https://example.com/drivers/Latitude_7420.cab"
+        "HP EliteBook 850 G8" = "https://example.com/drivers/EliteBook_850_G8.zip"
+    }
+
+    # Répertoire principal pour les fichiers de pilotes
+    $basePath = "C:\Systools"
+    $driverPath = "$basePath\Drivers"
+
+    # Vérifier et créer les répertoires nécessaires
+    if (-not (Test-Path $basePath)) {
+        Write-Host "Création du répertoire : $basePath"
+        New-Item -Path $basePath -ItemType Directory | Out-Null
+    }
+    if (-not (Test-Path $driverPath)) {
+        Write-Host "Création du répertoire : $driverPath"
+        New-Item -Path $driverPath -ItemType Directory | Out-Null
+    }
+
+    # Identifier le modèle de l'ordinateur
+    try {
+        $model = (Get-CimInstance -ClassName Win32_ComputerSystem).Model
+        Write-Host "Modèle détecté : $model" -ForegroundColor Green
+    } catch {
+        Write-Host "Erreur lors de la détection du modèle de poste : $_" -ForegroundColor Red
+        return
+    }
+
+    # Vérifier si le modèle existe dans le tableau
+    if (-not $DriverUrls.ContainsKey($model)) {
+        Write-Host "Aucun pilote trouvé pour le modèle : $model" -ForegroundColor Yellow
+        return
+    }
+
+    # Télécharger le fichier associé au modèle
+    $url = $DriverUrls[$model]
+    $destination = "$driverPath\$(Split-Path -Leaf $url)"
+    Write-Host "Téléchargement des pilotes depuis : $url" -ForegroundColor Cyan
+    try {
+        Invoke-WebRequest -Uri $url -OutFile $destination -UseBasicParsing
+        Write-Host "Téléchargement terminé : $destination" -ForegroundColor Green
+    } catch {
+        Write-Host "Erreur lors du téléchargement des pilotes : $_" -ForegroundColor Red
+        return
+    }
+
+    # Décompresser le fichier (ZIP ou CAB)
+    Write-Host "Décompression des pilotes..."
+    try {
+        if ($destination -like "*.zip") {
+            Expand-Archive -Path $destination -DestinationPath $driverPath -Force
+        } elseif ($destination -like "*.cab") {
+            $expandPath = "$driverPath\Expanded"
+            if (-not (Test-Path $expandPath)) {
+                New-Item -Path $expandPath -ItemType Directory | Out-Null
+            }
+            Expand-Cab -CabPath $destination -DestinationPath $expandPath
+        } else {
+            Write-Host "Format de fichier inconnu : $destination" -ForegroundColor Red
+            return
+        }
+        Write-Host "Décompression terminée." -ForegroundColor Green
+    } catch {
+        Write-Host "Erreur lors de la décompression : $_" -ForegroundColor Red
+        return
+    }
+
+    # Ajouter les pilotes avec DISM ou Add-WindowsDriver
+    Write-Host "Injection des pilotes avec DISM..."
+    try {
+        $driverFolders = Get-ChildItem -Path $driverPath -Recurse -Directory
+        foreach ($folder in $driverFolders) {
+            dism /image:C:\ /Add-Driver /Driver:$($folder.FullName) /Recurse /ForceUnsigned
+            Write-Host "Pilotes injectés depuis : $($folder.FullName)" -ForegroundColor Green
+        }
+        Write-Host "Injection des pilotes terminée." -ForegroundColor Green
+    } catch {
+        Write-Host "Erreur lors de l'injection des pilotes : $_" -ForegroundColor Red
+    }
+}
