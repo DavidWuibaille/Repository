@@ -45,3 +45,47 @@ function Log-Message {
     $logMessage = "$timestamp - $message"
     Add-Content -Path $logFilePath -Value $logMessage
 }
+
+
+# Fonction : Récupérer des informations d'un ordinateur via une API
+function Get-ComputerInfoFromAPI {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$WebServiceUrl # URL du service web
+    )
+
+    # Obtenir l'adresse MAC de l'interface réseau active
+    try {
+        $macAddresses = Get-WmiObject Win32_NetworkAdapter | Where-Object { $_.NetConnectionStatus -eq 2 } | Select-Object -ExpandProperty MACAddress
+        $macAddresses = $macAddresses.replace(":", "").replace("-", "") # Nettoyer le format MAC
+        Log-Message "MAC Addresses: $macAddresses"
+    } catch {
+        Log-Message "Erreur lors de l'obtention de l'adresse MAC : $_"
+        return $null
+    }
+
+    # Construire l'URL de la requête
+    $urlws = "$WebServiceUrl?macaddress=$macAddresses"
+    Log-Message "URL construite : $urlws"
+
+    # Appeler l'API et récupérer les informations
+    try {
+        $response = Invoke-RestMethod -Uri $urlws
+        # Vérifier si une réponse valide est reçue
+        if ($response.Computername) {
+            Log-Message "Réponse reçue : ComputerName = $($response.Computername), Postype = $($response.postype), Keyboard = $($response.setkeyboard)"
+            return @{
+                Computername = $response.Computername
+                Postype      = $response.postype
+                SetKeyboard  = $response.setkeyboard
+            }
+        } else {
+            Log-Message "Aucun ordinateur valide trouvé pour MAC $macAddresses"
+            return $null
+        }
+    } catch {
+        Log-Message "Erreur lors de la communication avec le service web : $_"
+        return $null
+    }
+}
+
