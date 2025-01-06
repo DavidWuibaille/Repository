@@ -85,8 +85,7 @@ function Get-ApplicationData {
 function Get-BitlockerDetails {
     param (
         [Parameter(Mandatory = $true)]
-        [System.Data.SqlClient.SqlConnection]$Connection,
-
+        [System.Data.SqlClient.SqlConnection]$Connection
     )
 
     # Initialiser la collection pour stocker les données
@@ -130,8 +129,7 @@ function Get-BitlockerDetails {
 function Get-WindowsDetails {
     param (
         [Parameter(Mandatory = $true)]
-        [System.Data.SqlClient.SqlConnection]$Connection,
-
+        [System.Data.SqlClient.SqlConnection]$Connection
     )
 
     # Initialiser la collection pour stocker les données
