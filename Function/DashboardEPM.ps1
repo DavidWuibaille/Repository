@@ -231,6 +231,7 @@ $WindowsDetails        = Get-WindowsDetails    -Connection $Connection
 $WorkstationModels     = Get-WorkstationModels -Connection $Connection
 $WindowsgroupesVersion = $WindowsDetails | Group-Object -Property VERSION
 $BitlockerStatus       = $BitlockerDetails | Group-Object -Property Bitlocker
+$Modelscount           = $WorkstationModels | Group-Object -Property MODEL
 Close-SQLConnection -Connection $Connection
 
 
