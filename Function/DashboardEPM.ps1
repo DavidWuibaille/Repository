@@ -87,8 +87,6 @@ function Get-BitlockerDetails {
         [Parameter(Mandatory = $true)]
         [System.Data.SqlClient.SqlConnection]$Connection,
 
-        [Parameter(Mandatory = $true)]
-        [string]$OSTypeFilter = "Windows 11"  # Filtre par défaut pour le système d'exploitation
     )
 
     # Initialiser la collection pour stocker les données
@@ -104,7 +102,7 @@ function Get-BitlockerDetails {
         LEFT OUTER JOIN BitLocker A3 (nolock) ON A0.Computer_Idn = A3.Computer_Idn
         LEFT OUTER JOIN TPMSystem A4 (nolock) ON A0.Computer_Idn = A4.Computer_Idn
         LEFT OUTER JOIN CompSystem A5 (nolock) ON A0.Computer_Idn = A5.Computer_Idn
-        WHERE (A1.OSTYPE LIKE N'%$OSTypeFilter%')
+        WHERE (A1.OSTYPE LIKE N'%Windows%')
         ORDER BY A0.DISPLAYNAME
 "@
 
@@ -134,8 +132,6 @@ function Get-WindowsDetails {
         [Parameter(Mandatory = $true)]
         [System.Data.SqlClient.SqlConnection]$Connection,
 
-        [Parameter(Mandatory = $true)]
-        [string]$OSTypeFilter = "Windows 11"  # Filtre par défaut pour le système d'exploitation
     )
 
     # Initialiser la collection pour stocker les données
@@ -147,7 +143,7 @@ function Get-WindowsDetails {
         FROM Computer A0 (nolock)
         LEFT OUTER JOIN Operating_System A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
         LEFT OUTER JOIN OSNT A2 (nolock) ON A0.Computer_Idn = A2.Computer_Idn
-        WHERE (A1.OSTYPE LIKE N'%$OSTypeFilter%')
+        WHERE (A1.OSTYPE LIKE N'%Windows%')
         ORDER BY A0.DISPLAYNAME
 "@
 
