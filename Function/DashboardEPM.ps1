@@ -112,9 +112,9 @@ function Get-BitlockerDetails {
     foreach ($element in $table) {
         $BitlockerDetails += [PSCustomObject]@{
             'DEVICENAME'    = $element.DISPLAYNAME
+            'BitLocker'     = $element.CONVERSIONSTATUS
             'SECURE Boot'   = $element.SECUREBOOTENABLED
             'UEFI'          = $element.UEFIENABLED
-            'BitLocker'     = $element.CONVERSIONSTATUS
             'TPM'           = $element.TPMENABLE
             'TPM Version'   = $element.TPMVERSION
             'Model'         = $element.MODEL
