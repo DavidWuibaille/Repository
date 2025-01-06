@@ -162,7 +162,7 @@ function Get-WindowsDetails {
             'VERSION'    = $versionFull
         }
     }
-
+    $WindowsDetails = $WindowsDetails | Sort-Object VERSION
     # Retourner la collection d'objets
     return $WindowsDetails
 }
