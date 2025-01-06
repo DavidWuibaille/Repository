@@ -73,7 +73,7 @@ function Get-ApplicationData {
         $ApplicationData += [PSCustomObject]@{
             'SUITENAME'   = $element.SUITENAME
             'VERSION'     = $element.VERSION
-            'DISPLAYNAME' = $element.DISPLAYNAME
+            'DEVICENAME' = $element.DISPLAYNAME
         }
     }
 
