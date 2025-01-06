@@ -230,6 +230,7 @@ $BitlockerDetails      = Get-BitlockerDetails  -Connection $Connection
 $WindowsDetails        = Get-WindowsDetails    -Connection $Connection
 $WorkstationModels     = Get-WorkstationModels -Connection $Connection
 $WindowsgroupesVersion = $WindowsDetails | Group-Object -Property VERSION
+$BitlockerStatus       = $BitlockerDetails | Group-Object -Property Bitlocker
 Close-SQLConnection -Connection $Connection
 
 
