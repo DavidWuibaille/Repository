@@ -189,3 +189,41 @@ function Close-SQLConnection {
     }
 }
 
+
+function Get-WorkstationModels {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection
+    )
+
+    # Initialiser la collection pour stocker les données
+    $WorkstationModels = @()
+
+    # Définir la requête SQL
+    $query = @"
+        SELECT DISTINCT A0.DISPLAYNAME, A1.MODEL
+        FROM Computer A0 (nolock)
+        LEFT OUTER JOIN CompSystem A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
+        WHERE (A0.Computer_Idn NOT IN (
+            SELECT Computer_Idn 
+            FROM Computer 
+            WHERE TYPE LIKE N'%Server%'
+        ))
+        ORDER BY A0.DISPLAYNAME
+"@
+
+    # Exécuter la requête et charger les résultats
+    $table = Get-SqlData -Connection $Connection -Query $query
+
+    # Parcourir les résultats et remplir la collection
+    foreach ($element in $table) {
+        $WorkstationModels += [PSCustomObject]@{
+            'DEVICENAME' = $element.DISPLAYNAME
+            'MODEL'      = $element.MODEL
+        }
+    }
+
+    # Retourner la collection d'objets
+    return $WorkstationModels
+}
+
