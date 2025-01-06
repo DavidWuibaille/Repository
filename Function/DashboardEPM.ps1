@@ -88,7 +88,7 @@ function Get-BitlockerDetails {
         [System.Data.SqlClient.SqlConnection]$Connection,
 
         [Parameter(Mandatory = $true)]
-        [string]$OSTypeFilter = "Windows 10"  # Filtre par défaut pour le système d'exploitation
+        [string]$OSTypeFilter = "Windows 11"  # Filtre par défaut pour le système d'exploitation
     )
 
     # Initialiser la collection pour stocker les données
@@ -135,7 +135,7 @@ function Get-WindowsDetails {
         [System.Data.SqlClient.SqlConnection]$Connection,
 
         [Parameter(Mandatory = $true)]
-        [string]$OSTypeFilter = "Windows 1"  # Filtre par défaut pour le système d'exploitation
+        [string]$OSTypeFilter = "Windows 11"  # Filtre par défaut pour le système d'exploitation
     )
 
     # Initialiser la collection pour stocker les données
