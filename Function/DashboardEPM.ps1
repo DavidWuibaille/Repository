@@ -221,3 +221,16 @@ function Get-WorkstationModels {
     return $WorkstationModels
 }
 
+
+
+$Connection            = Connect-SQLDatabase   -Server $ServerSQL -Database $database -User $user -Password $PassSQL
+$Application1          = Get-ApplicationData   -Connection $Connection -AppFilter $ApplicationFilter1
+$Application2          = Get-ApplicationData   -Connection $Connection -AppFilter $ApplicationFilter2
+$BitlockerDetails      = Get-BitlockerDetails  -Connection $Connection
+$WindowsDetails        = Get-WindowsDetails    -Connection $Connection
+$WorkstationModels     = Get-WorkstationModels -Connection $Connection
+$WindowsgroupesVersion = $WindowsDetails | Group-Object -Property VERSION
+Close-SQLConnection -Connection $Connection
+
+
+
