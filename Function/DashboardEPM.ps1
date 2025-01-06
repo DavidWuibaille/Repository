@@ -222,13 +222,56 @@ function Get-WorkstationModels {
 }
 
 
+function Get-EnvironmentVariables {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection,
 
-$Connection            = Connect-SQLDatabase   -Server $ServerSQL -Database $database -User $user -Password $PassSQL
-$Application1          = Get-ApplicationData   -Connection $Connection -AppFilter $ApplicationFilter1
-$Application2          = Get-ApplicationData   -Connection $Connection -AppFilter $ApplicationFilter2
-$BitlockerDetails      = Get-BitlockerDetails  -Connection $Connection
-$WindowsDetails        = Get-WindowsDetails    -Connection $Connection
-$WorkstationModels     = Get-WorkstationModels -Connection $Connection
+        [Parameter(Mandatory = $true)]
+        [string]$VariableName
+    )
+
+    # Initialiser la collection pour stocker les données
+    $EnvironmentVariables = @()
+
+    # Définir la requête SQL avec le filtre pour le nom de la variable
+    $query = @"
+        SELECT DISTINCT A0.DISPLAYNAME, A1.VALUESTRING
+        FROM Computer A0 (nolock)
+        LEFT OUTER JOIN EnvironSettings A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
+        WHERE (A0.Computer_Idn NOT IN (
+            SELECT Computer_Idn 
+            FROM Computer 
+            WHERE TYPE LIKE N'%Server%'
+        ))
+        AND A1.NAME = N'$VariableName'
+        ORDER BY A0.DISPLAYNAME
+"@
+
+    # Exécuter la requête et charger les résultats
+    $table = Get-SqlData -Connection $Connection -Query $query
+
+    # Parcourir les résultats et remplir la collection
+    foreach ($element in $table) {
+        $EnvironmentVariables += [PSCustomObject]@{
+            'DEVICENAME' = $element.DISPLAYNAME
+            'VALUE'      = $element.VALUESTRING
+        }
+    }
+
+    # Retourner la collection d'objets
+    return $EnvironmentVariables
+}
+
+
+
+$Connection            = Connect-SQLDatabase      -Server $ServerSQL -Database $database -User $user -Password $PassSQL
+$Application1          = Get-ApplicationData      -Connection $Connection -AppFilter $ApplicationFilter1
+$Application2          = Get-ApplicationData      -Connection $Connection -AppFilter $ApplicationFilter2
+$BitlockerDetails      = Get-BitlockerDetails     -Connection $Connection
+$WindowsDetails        = Get-WindowsDetails       -Connection $Connection
+$WorkstationModels     = Get-WorkstationModels    -Connection $Connection
+$Variable1             = Get-EnvironmentVariables -Connection $Connection -VariableName $VariableFilter1
 $WindowsgroupesVersion = $WindowsDetails | Group-Object -Property VERSION
 $BitlockerStatus       = $BitlockerDetails | Group-Object -Property Bitlocker
 $Modelscount           = $WorkstationModels | Group-Object -Property MODEL
