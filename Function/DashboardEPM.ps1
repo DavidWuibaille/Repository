@@ -71,7 +71,7 @@ function Get-ApplicationData {
     # Parcourir les résultats et remplir la collection
     foreach ($element in $table) {
         $ApplicationData += [PSCustomObject]@{
-            'SUITENAME'   = $element.SUITENAME
+            'APPLICATION'   = $element.SUITENAME
             'VERSION'     = $element.VERSION
             'DEVICENAME' = $element.DISPLAYNAME
         }
