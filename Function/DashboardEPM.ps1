@@ -50,7 +50,7 @@ function Get-ApplicationData {
         [System.Data.SqlClient.SqlConnection]$Connection,
 
         [Parameter(Mandatory = $true)]
-        [string]$Filter
+        [string]$AppFilter
     )
 
     # Initialiser la collection pour stocker les données
@@ -62,7 +62,7 @@ function Get-ApplicationData {
         FROM Computer A0 (nolock)
         LEFT OUTER JOIN AppSoftwareSuites A1 (nolock) 
         ON A0.Computer_Idn = A1.Computer_Idn
-        WHERE (A1.SUITENAME LIKE N'%$Filter%')
+        WHERE (A1.SUITENAME LIKE N'%$AppFilter%')
         ORDER BY A0.DISPLAYNAME
 "@
 
