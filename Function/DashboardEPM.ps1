@@ -166,3 +166,26 @@ function Get-WindowsDetails {
     # Retourner la collection d'objets
     return $WindowsDetails
 }
+
+
+function Close-SQLConnection {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection
+    )
+
+    try {
+        # Vérifier si la connexion est ouverte
+        if ($Connection.State -eq [System.Data.ConnectionState]::Open) {
+            $Connection.Close()
+            Write-Host "------ Connection closed successfully."
+        } else {
+            Write-Host "------ Connection is already closed or not initialized."
+        }
+    } catch {
+        # Gestion des erreurs
+        Write-Host "------ Error closing the connection."
+        Write-Host "------ Error details: $_"
+    }
+}
+
