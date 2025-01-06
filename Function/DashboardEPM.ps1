@@ -44,3 +44,39 @@ function Connect-SQLDatabase {
     }
 }
 
+function Get-ApplicationData {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Filter
+    )
+
+    # Initialiser la collection pour stocker les données
+    $ApplicationData = @()
+
+    # Définir la requête SQL avec le filtre dynamique
+    $query = @"
+        SELECT DISTINCT A0.DISPLAYNAME, A1.SUITENAME 
+        FROM Computer A0 (nolock)
+        LEFT OUTER JOIN AppSoftwareSuites A1 (nolock) 
+        ON A0.Computer_Idn = A1.Computer_Idn
+        WHERE (A1.SUITENAME LIKE N'%$Filter%')
+        ORDER BY A0.DISPLAYNAME
+"@
+
+    # Exécuter la requête et charger les résultats
+    $table = Get-SqlData -Connection $Connection -Query $query
+
+    # Parcourir les résultats et remplir la collection
+    foreach ($element in $table) {
+        $ApplicationData += [PSCustomObject]@{
+            'DISPLAYNAME' = $element.DISPLAYNAME
+            'SUITENAME'   = $element.SUITENAME
+        }
+    }
+
+    # Retourner la collection
+    return $ApplicationData
+}
