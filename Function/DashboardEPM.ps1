@@ -58,10 +58,9 @@ function Get-ApplicationData {
 
     # Définir la requête SQL avec le filtre dynamique
     $query = @"
-        SELECT DISTINCT A0.DISPLAYNAME, A1.SUITENAME 
+        SELECT DISTINCT A0.DISPLAYNAME, A1.SUITENAME, A1.VERSION
         FROM Computer A0 (nolock)
-        LEFT OUTER JOIN AppSoftwareSuites A1 (nolock) 
-        ON A0.Computer_Idn = A1.Computer_Idn
+        LEFT OUTER JOIN AppSoftwareSuites A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
         WHERE (A1.SUITENAME LIKE N'%$AppFilter%')
         ORDER BY A0.DISPLAYNAME
 "@
@@ -74,6 +73,7 @@ function Get-ApplicationData {
         $ApplicationData += [PSCustomObject]@{
             'DISPLAYNAME' = $element.DISPLAYNAME
             'SUITENAME'   = $element.SUITENAME
+            'VERSION'     = $element.VERSION
         }
     }
 
