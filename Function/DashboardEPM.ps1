@@ -112,7 +112,7 @@ function Get-BitlockerDetails {
     foreach ($element in $table) {
         $BitlockerDetails += [PSCustomObject]@{
             'DEVICENAME'    = $element.DISPLAYNAME
-            'BitLocker'     = $element.CONVERSIONSTATUS
+            'BitLocker'     = if ([string]::IsNullOrEmpty($element.CONVERSIONSTATUS)) { "NoData" } else { $element.CONVERSIONSTATUS }
             'SECURE Boot'   = $element.SECUREBOOTENABLED
             'UEFI'          = $element.UEFIENABLED
             'TPM'           = $element.TPMENABLE
