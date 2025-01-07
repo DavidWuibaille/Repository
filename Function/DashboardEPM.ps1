@@ -300,6 +300,53 @@ function Get-EnvironmentVariables {
     return $EnvironmentVariables
 }
 
+function Get-HardwareScanDay {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection
+    )
+
+    # Initialiser la collection pour stocker les données
+    $HardwareScanData = @()
+
+    # Définir la requête SQL
+    $query = @"
+        SELECT DISTINCT A0.DISPLAYNAME, A0.HWLASTSCANDATE
+        FROM Computer A0 (nolock)
+        WHERE (A0.Computer_Idn NOT IN (
+            SELECT Computer_Idn 
+            FROM Computer 
+            WHERE TYPE LIKE N'%Server%'
+        ))
+        ORDER BY A0.DISPLAYNAME
+"@
+
+    # Exécuter la requête et charger les résultats
+    $table = Get-SqlData -Connection $Connection -Query $query
+
+    # Parcourir les résultats et remplir la collection
+    foreach ($element in $table) {
+        $scanDate = $element.HWLASTSCANDATE
+        $daysDifference = (Get-Date) - [datetime]$scanDate
+
+        # Classifier la date selon les intervalles
+        $category = switch ($true) {
+            ($daysDifference.TotalDays -le 7)  { "<7 jours" }
+            ($daysDifference.TotalDays -le 14) { "<14 jours" }
+            ($daysDifference.TotalDays -le 30) { "<30 jours" }
+            ($daysDifference.TotalDays -le 90) { "<90 jours" }
+            default                            { ">90 jours" }
+        }
+
+        $HardwareScanData += [PSCustomObject]@{
+            'DEVICENAME'      = $element.DISPLAYNAME
+            'SCAN_CATEGORY'   = $category
+        }
+    }
+
+    # Retourner la collection d'objets
+    return $HardwareScanData
+}
 
 
 $Connection            = Connect-SQLDatabase                     -Server $ServerSQL -Database $database -User $user -Password $PassSQL
@@ -310,10 +357,12 @@ $WindowsDetails        = Get-WindowsDetails                      -Connection $Co
 $WorkstationModels     = Get-WorkstationModels                   -Connection $Connection
 $WorkstationMakes      = Get-WorkstationManufacturers            -Connection $Connection
 $Variable1             = Get-EnvironmentVariables                -Connection $Connection -VariableName $VariableFilter1
+$HardwareScanDay       = Get-HardwareScanDay                     -Connection $Connection
 $WindowsgroupesVersion = $WindowsDetails    | Group-Object -Property VERSION
 $BitlockerStatus       = $BitlockerDetails  | Group-Object -Property Bitlocker
 $Modelscount           = $WorkstationModels | Group-Object -Property MODEL
 $Makesount             = $WorkstationMakes  | Group-Object -Property MANUFACTURER
+$ScanDaycount          = HardwareScanDay    | Group-Object -Property SCAN_CATEGORY
 Close-SQLConnection -Connection $Connection
 
 
