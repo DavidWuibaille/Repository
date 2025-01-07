@@ -221,6 +221,43 @@ function Get-WorkstationModels {
     return $WorkstationModels
 }
 
+function Get-WorkstationManufacturers {
+    param (
+        [Parameter(Mandatory = $true)]
+        [System.Data.SqlClient.SqlConnection]$Connection
+    )
+
+    # Initialiser la collection pour stocker les données
+    $ManufacturerData = @()
+
+    # Définir la requête SQL
+    $query = @"
+        SELECT DISTINCT A0.DISPLAYNAME, A1.MANUFACTURER
+        FROM Computer A0 (nolock)
+        LEFT OUTER JOIN CompSystem A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
+        WHERE (A0.Computer_Idn NOT IN (
+            SELECT Computer_Idn 
+            FROM Computer 
+            WHERE TYPE LIKE N'%Server%'
+        ))
+        ORDER BY A0.DISPLAYNAME
+"@
+
+    # Exécuter la requête et charger les résultats
+    $table = Get-SqlData -Connection $Connection -Query $query
+
+    # Parcourir les résultats et remplir la collection
+    foreach ($element in $table) {
+        $ManufacturerData += [PSCustomObject]@{
+            'DEVICENAME'    = $element.DISPLAYNAME
+            'MANUFACTURER'  = if ([string]::IsNullOrEmpty($element.MANUFACTURER)) { "NoData" } else { $element.MANUFACTURER }
+        }
+    }
+
+    # Retourner la collection d'objets
+    return $ManufacturerData
+}
+
 
 function Get-EnvironmentVariables {
     param (
@@ -265,16 +302,18 @@ function Get-EnvironmentVariables {
 
 
 
-$Connection            = Connect-SQLDatabase      -Server $ServerSQL -Database $database -User $user -Password $PassSQL
-$Application1          = Get-ApplicationData      -Connection $Connection -AppFilter $ApplicationFilter1
-$Application2          = Get-ApplicationData      -Connection $Connection -AppFilter $ApplicationFilter2
-$BitlockerDetails      = Get-BitlockerDetails     -Connection $Connection
-$WindowsDetails        = Get-WindowsDetails       -Connection $Connection
-$WorkstationModels     = Get-WorkstationModels    -Connection $Connection
+$Connection            = Connect-SQLDatabase              -Server $ServerSQL -Database $database -User $user -Password $PassSQL
+$Application1          = Get-ApplicationData              -Connection $Connection -AppFilter $ApplicationFilter1
+$Application2          = Get-ApplicationData              -Connection $Connection -AppFilter $ApplicationFilter2
+$BitlockerDetails      = Get-BitlockerDetails             -Connection $Connection
+$WindowsDetails        = Get-WindowsDetails               -Connection $Connection
+$WorkstationModels     = Get-WorkstationModels            -Connection $Connection
+$WorkstationMakes      = Get-WorkstationManufacturers        -Connection $Connection
 $Variable1             = Get-EnvironmentVariables -Connection $Connection -VariableName $VariableFilter1
-$WindowsgroupesVersion = $WindowsDetails | Group-Object -Property VERSION
-$BitlockerStatus       = $BitlockerDetails | Group-Object -Property Bitlocker
+$WindowsgroupesVersion = $WindowsDetails    | Group-Object -Property VERSION
+$BitlockerStatus       = $BitlockerDetails  | Group-Object -Property Bitlocker
 $Modelscount           = $WorkstationModels | Group-Object -Property MODEL
+$Makesount             = $WorkstationMakes  | Group-Object -Property MANUFACTURER
 Close-SQLConnection -Connection $Connection
 
 
