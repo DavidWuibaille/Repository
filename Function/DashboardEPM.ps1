@@ -211,15 +211,23 @@ function Get-WorkstationModels {
 
     # Parcourir les résultats et remplir la collection
     foreach ($element in $table) {
+        # Vérifier si le modèle est vide, ne contient que des espaces ou est égal à "Default string"
+        $modelValue = if ([string]::IsNullOrWhiteSpace($element.MODEL) -or $element.MODEL -eq "Default string") {
+            "No Data"
+        } else {
+            $element.MODEL
+        }
+
         $WorkstationModels += [PSCustomObject]@{
             'DEVICENAME' = $element.DISPLAYNAME
-            'MODEL'      = $element.MODEL
+            'MODEL'      = $modelValue
         }
     }
 
     # Retourner la collection d'objets
     return $WorkstationModels
 }
+
 
 function Get-WorkstationManufacturers {
     param (
@@ -362,7 +370,7 @@ $WindowsgroupesVersion = $WindowsDetails    | Group-Object -Property VERSION
 $BitlockerStatus       = $BitlockerDetails  | Group-Object -Property Bitlocker
 $Modelscount           = $WorkstationModels | Group-Object -Property MODEL
 $Makesount             = $WorkstationMakes  | Group-Object -Property MANUFACTURER
-$ScanDaycount          = HardwareScanDay    | Group-Object -Property SCAN_CATEGORY
+#$ScanDaycount          = HardwareScanDay    | Group-Object -Property SCAN_CATEGORY
 Close-SQLConnection -Connection $Connection
 
 
