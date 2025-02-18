@@ -1,4 +1,4 @@
-version: "3.9"
+erversion: "3.9"
 services:
   codeserver:
     container_name: Code-Server
@@ -19,6 +19,6 @@ services:
       TZ: Europe/Bucharest
       PUID: 1026
       PGID: 100
-      PROXY_DOMAIN: dev.wuibaille.fr
+      PROXY_DOMAIN: REMPLACERparHostname.wuibaille.fr********************************************
       PASSWORD: NEVUPOUP59
       SUDO_PASSWORD: NEVUPOUP59
