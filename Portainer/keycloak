@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    container_name: Keycloak-DB
+    hostname: keycloak-db
+    mem_limit: 1g
+    cpu_shares: 1024
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "keycloak", "-U", "keycloakuser"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    volumes:
+      - /volume1/DockerConfig/keycloak/data:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloakuser
+      POSTGRES_PASSWORD: keycloakpass
+    restart: always
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:legacy
+    container_name: Keycloak
+    restart: always
+    healthcheck:
+      test: curl -f http://localhost:8080/ || exit 1
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: db
+      DB_DATABASE: keycloak
+      DB_USER: keycloakuser
+      DB_SCHEMA: public
+      DB_PASSWORD: keycloakpass
+      KEYCLOAK_USER: david
+      KEYCLOAK_PASSWORD: REMPLACERparPASSWORD***********************************
+      PROXY_ADDRESS_FORWARDING: true
+    ports:
+      - 8711:8080
+    depends_on:
+      - db
