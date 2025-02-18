@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  codeserver:
+    container_name: Code-Server
+    image: ghcr.io/linuxserver/code-server
+    healthcheck:
+     test: curl -f http://localhost:8443/ || exit 1
+    mem_limit: 6g
+    cpu_shares: 768
+    security_opt:
+      - no-new-privileges:false
+    restart: on-failure:5
+    ports:
+      - 8377:8443
+    volumes:
+      - /volume1/DockerConfig/code-server/config:/config:rw
+      - /volume1/web:/web:rw
+    environment:
+      TZ: Europe/Bucharest
+      PUID: 1026
+      PGID: 100
+      PROXY_DOMAIN: dev.wuibaille.fr
+      PASSWORD: NEVUPOUP59
+      SUDO_PASSWORD: NEVUPOUP59
