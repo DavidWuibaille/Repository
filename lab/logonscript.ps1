@@ -1,6 +1,6 @@
 # Options de configuration
-$ServiceStopOption = "Tanium,Ivanti"  # Services a desactiver et arreter
-$ServiceStartOption = ""              # Services a activer et demarrer (ex: "Tanium,Ivanti")
+$ServiceStopOption = "Tanium"  # Services a desactiver et arreter
+$ServiceStartOption = "Ivanti"              # Services a activer et demarrer (ex: "Tanium,Ivanti")
 $InstallOption = "Chrome,7Zip"        # Applications a installer ("Chrome", "7Zip", "Chrome,7Zip" ou "")
 
 # Convertir les options en listes
