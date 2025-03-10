@@ -1,36 +1,39 @@
-# Définir l'option en début de script
-# "Tanium" = Désactiver les services Tanium
-# "Ivanti" = Désactiver les services qui commencent par "IVANTI"
-# "None" = Ne rien faire
-$ServiceOption = "Tanium"  # Change cette valeur selon ton besoin
+# Définir les options en début de script
+# Possibilités : "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
+$ServiceOption = "Tanium,Ivanti"  # Change cette valeur selon ton besoin
 
-# Vérifier et appliquer l'option choisie
-if ($ServiceOption -eq "Tanium") {
-    Write-Host "✅ Désactivation et arrêt des services Tanium..."
-    Set-Service -Name "Tanium Client" -StartupType Disabled
-    Set-Service -Name "TaniumDriverSvc" -StartupType Disabled
+# Convertir la variable en tableau
+$ServiceOptionList = $ServiceOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
 
-    Stop-Service -Name "Tanium Client" -Force -ErrorAction SilentlyContinue
-    Stop-Service -Name "TaniumDriverSvc" -Force -ErrorAction SilentlyContinue
-    Write-Host "✅ Services Tanium désactivés et arrêtés."
+# Fonction pour désactiver et arrêter des services
+function Disable-ServiceByName ($ServiceName) {
+    if (Get-Service -Name $ServiceName -ErrorAction SilentlyContinue) {
+        Write-Host "🔹 Désactivation et arrêt de $ServiceName..."
+        Set-Service -Name $ServiceName -StartupType Disabled
+        Stop-Service -Name $ServiceName -Force -ErrorAction SilentlyContinue
+        Write-Host "✅ Service $ServiceName désactivé et arrêté."
+    }
 }
-elseif ($ServiceOption -eq "Ivanti") {
-    Write-Host "✅ Recherche des services IVANTI..."
-    $IvantiServices = Get-Service | Where-Object { $_.Name -match "^IVANTI" }
 
+# Désactivation des services Tanium si sélectionné
+if ($ServiceOptionList -contains "tanium") {
+    Write-Host "✅ Désactivation et arrêt des services Tanium..."
+    Disable-ServiceByName "Tanium Client"
+    Disable-ServiceByName "TaniumDriverSvc"
+}
+
+# Désactivation des services IVANTI si sélectionné
+if ($ServiceOptionList -contains "ivanti") {
+    Write-Host "✅ Désactivation et arrêt des services IVANTI..."
+    $IvantiServices = Get-Service | Where-Object { $_.Name -match "^IVANTI" }
+    
     if ($IvantiServices) {
         foreach ($service in $IvantiServices) {
-            Write-Host "🔹 Désactivation et arrêt de $($service.Name)..."
-            Set-Service -Name $service.Name -StartupType Disabled
-            Stop-Service -Name $service.Name -Force -ErrorAction SilentlyContinue
+            Disable-ServiceByName $service.Name
         }
-        Write-Host "✅ Tous les services IVANTI ont été désactivés et arrêtés."
     } else {
         Write-Host "❌ Aucun service IVANTI trouvé."
     }
-}
-else {
-    Write-Host "ℹ️ Aucun service désactivé. Le script continue..."
 }
 
 # Appliquer les optimisations de performance (toujours)
@@ -55,11 +58,7 @@ if ($OSName -match "Windows 10|Windows 11") {
     )
 
     foreach ($service in $servicesToDisable) {
-        if (Get-Service -Name $service -ErrorAction SilentlyContinue) {
-            Set-Service -Name $service -StartupType Disabled
-            Stop-Service -Name $service -Force -ErrorAction SilentlyContinue
-            Write-Host "✅ Service $service désactivé."
-        }
+        Disable-ServiceByName $service
     }
 
     # Configuration d'un WSUS "fantôme" pour bloquer Windows Update sans désactiver le service
