@@ -1,5 +1,5 @@
 # Options de configuration
-$ServiceOption = "Tanium,Ivanti"  # "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
+$ServiceOption = "Tanium"  # "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
 $InstallOption = "Chrome,7Zip"    # "Chrome", "7Zip", "Chrome,7Zip" ou "" (ne rien installer)
 
 # Convertir les options en listes
