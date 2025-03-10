@@ -19,13 +19,28 @@ function Disable-ServiceByName ($ServiceName) {
     }
 }
 
+function Enable-ServiceByName ($ServiceName) {
+    $service = Get-Service -Name $ServiceName -ErrorAction SilentlyContinue
+    if ($service) {
+        Write-Host "🔹 Activation et démarrage de $ServiceName..."
+        Set-Service -Name $ServiceName -StartupType Automatic
+        Start-Service -Name $ServiceName -ErrorAction SilentlyContinue
+        Write-Host "✅ Service $ServiceName activé et démarré."
+    } else {
+        Write-Host "❌ Service $ServiceName introuvable."
+    }
+}
+
+
 # Désactivation des services Tanium si sélectionné
 if ($ServiceOptionList -contains "tanium") {
     Write-Host "✅ Désactivation et arrêt des services Tanium..."
     Disable-ServiceByName "Tanium Client"
     Disable-ServiceByName "TaniumDriverSvc"
+} Else  {
+    Enable-ServiceByName "Tanium Client"
+    Enable-ServiceByName "TaniumDriverSvc" 
 }
-
 # Désactivation des services IVANTI si sélectionné
 if ($ServiceOptionList -contains "ivanti") {
     Write-Host "✅ Désactivation et arrêt des services IVANTI..."
@@ -38,6 +53,18 @@ if ($ServiceOptionList -contains "ivanti") {
     } else {
         Write-Host "❌ Aucun service IVANTI trouvé."
     }
+} Else  {
+    $IvantiServices = Get-Service | Where-Object { $_.Name -match "^IVANTI" }
+    
+    if ($IvantiServices) {
+        foreach ($service in $IvantiServices) {
+            Enable-ServiceByName $service.Name
+        }
+    } else {
+        Write-Host "❌ Aucun service IVANTI trouvé."
+    }
+
+
 }
 
 # Fonction pour installer des applications courantes
