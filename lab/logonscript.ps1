@@ -1,9 +1,11 @@
 # Options de configuration
-$ServiceOption = "Tanium"  # "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
-$InstallOption = "Chrome,7Zip"    # "Chrome", "7Zip", "Chrome,7Zip" ou "" (ne rien installer)
+$ServiceStopOption = "Tanium,Ivanti"  # Services a desactiver et arreter
+$ServiceStartOption = ""              # Services a activer et demarrer (ex: "Tanium,Ivanti")
+$InstallOption = "Chrome,7Zip"        # Applications a installer ("Chrome", "7Zip", "Chrome,7Zip" ou "")
 
 # Convertir les options en listes
-$ServiceOptionList = $ServiceOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
+$ServiceStopList = $ServiceStopOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
+$ServiceStartList = $ServiceStartOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
 $InstallOptionList = $InstallOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
 
 # Fonction pour desactiver et arreter un service
@@ -28,19 +30,21 @@ function Enable-ServiceByName ($ServiceName) {
 }
 
 # Gestion des services Tanium
-if ($ServiceOptionList -contains "tanium") {
+if ($ServiceStopList -contains "tanium") {
     Write-Host "Desactivation des services Tanium..."
     Disable-ServiceByName "Tanium Client"
     Disable-ServiceByName "TaniumDriverSvc"
-} else {
+}
+if ($ServiceStartList -contains "tanium") {
     Write-Host "Activation des services Tanium..."
     Enable-ServiceByName "Tanium Client"
     Enable-ServiceByName "TaniumDriverSvc"
 }
 
 # Gestion des services IVANTI
-$IvantiServices = Get-Service | Where-Object { $_.DisplayName -like "ivanti*" }
-if ($ServiceOptionList -contains "ivanti") {
+$IvantiServices = Get-Service | Where-Object { $_.DisplayName -like "Ivanti*" }
+
+if ($ServiceStopList -contains "ivanti") {
     Write-Host "Desactivation des services IVANTI..."
     if ($IvantiServices) {
         foreach ($service in $IvantiServices) {
@@ -49,7 +53,9 @@ if ($ServiceOptionList -contains "ivanti") {
     } else {
         Write-Host "Aucun service IVANTI trouve."
     }
-} else {
+}
+
+if ($ServiceStartList -contains "ivanti") {
     Write-Host "Activation des services IVANTI..."
     if ($IvantiServices) {
         foreach ($service in $IvantiServices) {
