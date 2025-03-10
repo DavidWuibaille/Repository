@@ -39,7 +39,7 @@ if ($ServiceOptionList -contains "tanium") {
 }
 
 # Gestion des services IVANTI
-$IvantiServices = Get-Service | Where-Object { $_.Name -like "ivanti*" }
+$IvantiServices = Get-Service | Where-Object { $_.DisplayName -like "ivanti*" }
 if ($ServiceOptionList -contains "ivanti") {
     Write-Host "Desactivation des services IVANTI..."
     if ($IvantiServices) {
