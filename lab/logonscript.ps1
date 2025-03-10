@@ -1,6 +1,37 @@
-# Récupérer le nom du produit Windows
-$OSInfo = Get-WmiObject Win32_OperatingSystem
-$OSName = $OSInfo.Caption
+# Définir l'option en début de script
+# "Tanium" = Désactiver les services Tanium
+# "Ivanti" = Désactiver les services qui commencent par "IVANTI"
+# "None" = Ne rien faire
+$ServiceOption = "Tanium"  # Change cette valeur selon ton besoin
+
+# Vérifier et appliquer l'option choisie
+if ($ServiceOption -eq "Tanium") {
+    Write-Host "✅ Désactivation et arrêt des services Tanium..."
+    Set-Service -Name "Tanium Client" -StartupType Disabled
+    Set-Service -Name "TaniumDriverSvc" -StartupType Disabled
+
+    Stop-Service -Name "Tanium Client" -Force -ErrorAction SilentlyContinue
+    Stop-Service -Name "TaniumDriverSvc" -Force -ErrorAction SilentlyContinue
+    Write-Host "✅ Services Tanium désactivés et arrêtés."
+}
+elseif ($ServiceOption -eq "Ivanti") {
+    Write-Host "✅ Recherche des services IVANTI..."
+    $IvantiServices = Get-Service | Where-Object { $_.Name -match "^IVANTI" }
+
+    if ($IvantiServices) {
+        foreach ($service in $IvantiServices) {
+            Write-Host "🔹 Désactivation et arrêt de $($service.Name)..."
+            Set-Service -Name $service.Name -StartupType Disabled
+            Stop-Service -Name $service.Name -Force -ErrorAction SilentlyContinue
+        }
+        Write-Host "✅ Tous les services IVANTI ont été désactivés et arrêtés."
+    } else {
+        Write-Host "❌ Aucun service IVANTI trouvé."
+    }
+}
+else {
+    Write-Host "ℹ️ Aucun service désactivé. Le script continue..."
+}
 
 # Appliquer les optimisations de performance (toujours)
 Write-Host "🔹 Ajustement des paramètres de performance..."
@@ -9,16 +40,11 @@ powercfg -change -standby-timeout-ac 0  # Désactive la mise en veille
 Write-Host "✅ Optimisation des performances appliquée."
 
 # Vérifier si l'OS est un client Windows (Windows 10/11) et non un serveur
+$OSInfo = Get-WmiObject Win32_OperatingSystem
+$OSName = $OSInfo.Caption
+
 if ($OSName -match "Windows 10|Windows 11") {
     Write-Host "✅ Système d'exploitation client détecté ($OSName). Application des optimisations spécifiques..."
-
-    # Désactiver le démarrage des services Tanium
-    Set-Service -Name "Tanium Client" -StartupType Disabled
-    Set-Service -Name "TaniumDriverSvc" -StartupType Disabled
-
-    # Arrêter les services Tanium
-    Stop-Service -Name "Tanium Client" -Force -ErrorAction SilentlyContinue
-    Stop-Service -Name "TaniumDriverSvc" -Force -ErrorAction SilentlyContinue
 
     # Désactivation des services inutiles sur les OS clients
     Write-Host "🔹 Désactivation des services inutiles..."
