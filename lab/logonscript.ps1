@@ -1,9 +1,13 @@
 # Définir les options en début de script
-# Possibilités : "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
-$ServiceOption = "Tanium,Ivanti"  # Change cette valeur selon ton besoin
+# Possibilités pour $ServiceOption : "Tanium", "Ivanti", "Tanium,Ivanti" ou "" (ne rien faire)
+$ServiceOption = "Tanium,Ivanti"
 
-# Convertir la variable en tableau
+# Possibilités pour $InstallOption : "Chrome", "7Zip", "Chrome,7Zip" ou "" (ne rien installer)
+$InstallOption = "Chrome,7Zip"
+
+# Convertir les variables en tableaux
 $ServiceOptionList = $ServiceOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
+$InstallOptionList = $InstallOption -split ',' | ForEach-Object { $_.Trim().ToLower() }
 
 # Fonction pour désactiver et arrêter des services
 function Disable-ServiceByName ($ServiceName) {
@@ -34,6 +38,30 @@ if ($ServiceOptionList -contains "ivanti") {
     } else {
         Write-Host "❌ Aucun service IVANTI trouvé."
     }
+}
+
+# Fonction pour installer des applications courantes
+function Install-Application ($AppName) {
+    if ($AppName -eq "chrome") {
+        Write-Host "🔹 Installation de Google Chrome..."
+        Start-Process -FilePath "winget" -ArgumentList "install --id Google.Chrome --silent --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait
+        Write-Host "✅ Google Chrome installé."
+    }
+    elseif ($AppName -eq "7zip") {
+        Write-Host "🔹 Installation de 7-Zip..."
+        Start-Process -FilePath "winget" -ArgumentList "install --id 7zip.7zip --silent --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait
+        Write-Host "✅ 7-Zip installé."
+    }
+}
+
+# Installation des applications sélectionnées
+if ($InstallOptionList -contains "chrome" -or $InstallOptionList -contains "7zip") {
+    Write-Host "✅ Installation des applications demandées..."
+    foreach ($app in $InstallOptionList) {
+        Install-Application $app
+    }
+} else {
+    Write-Host "ℹ️ Aucune application à installer."
 }
 
 # Appliquer les optimisations de performance (toujours)
