@@ -20,10 +20,10 @@ if ($OSName -match "Windows 10|Windows 11") {
     Stop-Service -Name "Tanium Client" -Force -ErrorAction SilentlyContinue
     Stop-Service -Name "TaniumDriverSvc" -Force -ErrorAction SilentlyContinue
 
-    # Désactivation des services inutiles sur les OS clients (sauf Windows Update)
+    # Désactivation des services inutiles sur les OS clients
     Write-Host "🔹 Désactivation des services inutiles..."
     $servicesToDisable = @(
-        "SysMain",          # Superfetch (préfetche inutile sur SSD)
+        "SysMain",          # Superfetch (inutile sur SSD)
         "DiagTrack",        # Télémétrie Microsoft
         "dmwappushservice"  # Service de télémétrie
     )
@@ -46,15 +46,27 @@ if ($OSName -match "Windows 10|Windows 11") {
     Set-ItemProperty -Path $RegPath -Name "WUStatusServer" -Value "http://127.0.0.1" -Type String
     Set-ItemProperty -Path $RegPath -Name "UseWUServer" -Value 1 -Type DWord
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "UseWUServer" -Value 1 -Type DWord
+    Write-Host "✅ WSUS fantôme configuré."
 
-    Write-Host "✅ WSUS fantôme configuré. Windows Update ne pourra pas contacter Microsoft."
+    # Désactivation du Pare-feu Windows
+    Write-Host "🔹 Désactivation du Pare-feu Windows..."
+    Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+    Write-Host "✅ Pare-feu Windows désactivé."
 
-    Write-Host "✅ Optimisations spécifiques aux OS clients terminées."
+    # Désactivation de Windows Defender via la base de registre
+    Write-Host "🔹 Désactivation de l'Antivirus Microsoft Defender..."
+    $DefenderRegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender"
+    if (!(Test-Path $DefenderRegPath)) {
+        New-Item -Path $DefenderRegPath -Force | Out-Null
+    }
+    Set-ItemProperty -Path $DefenderRegPath -Name "DisableAntiSpyware" -Value 1 -Type DWord
+    Set-ItemProperty -Path $DefenderRegPath -Name "DisableRealtimeMonitoring" -Value 1 -Type DWord
+    Write-Host "✅ Microsoft Defender désactivé."
+
+    # Forcer l'application des stratégies
+    Write-Host "🔄 Application des nouvelles configurations..."
+    gpupdate /force
+    Write-Host "✅ Toutes les modifications ont été appliquées."
 } else {
-    Write-Host "❌ OS serveur détecté ($OSName). Aucune modification des services appliquée."
+    Write-Host "❌ OS serveur détecté ($OSName). Seules les optimisations de performance sont appliquées."
 }
-
-# Forcer la prise en compte des nouvelles configurations WSUS
-Write-Host "🔄 Application des nouvelles configurations Windows Update..."
-gpupdate /force
-Write-Host "✅ Configuration WSUS appliquée."
