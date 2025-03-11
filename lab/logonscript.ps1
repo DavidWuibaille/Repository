@@ -1,5 +1,5 @@
 # Configuration options
-$InstallOption = "Chrome,7Zip,ClientIVANTI,ClientTanium,ClientSCCM,ClientKACE"  # Applications to install
+$InstallOption = "chrome,7Zip,clientivanti,clienttanium,clientsccm,clientkace"  # Applications to install
 $UninstallOption = "Chrome"  # Applications to uninstall
 $WebShareURL = "https://nas.wuibaille.fr/labo777/DML/"
 $DownloadBasePath = "C:\Windows\Temp\DML"
