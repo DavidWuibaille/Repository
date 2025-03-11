@@ -110,8 +110,6 @@ function Uninstall-Application {
 }
 
 
-Write-Host "Disabling indexing on drive C"
-Get-WmiObject Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$false}
 
 Write-Host "Enabling High Performance power plan"
 powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
@@ -130,20 +128,29 @@ gpupdate /force
 
 
 # Execute installations
-foreach ($app in $InstallOptionList) {
-    Install-Application $app
+
+
+
+
+# Check if the OS is a Windows Client
+$OSInfo = Get-CimInstance Win32_OperatingSystem
+if ($OSInfo.ProductType -eq 1) {
+    Write-Host "Disable unnecessary services"
+    $VMServicesToDisable = @("SysMain", "DiagTrack", "dmwappushservice", "WSearch", "RetailDemo")
+    foreach ($service in $VMServicesToDisable) {
+        Stop-Service -Name $service -Force -ErrorAction SilentlyContinue
+        Set-Service -Name $service -StartupType Disabled
+    }
+
+    Write-Host "Disabling indexing on drive C"
+    Get-WmiObject Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$false}
+
+    foreach ($app in $InstallOptionList) {
+        Install-Application $app
+    }
+    
+    # Execute uninstallations
+    foreach ($app in $UninstallOptionList) {
+        Uninstall-Application $app
+    }
 }
-
-# Execute uninstallations
-foreach ($app in $UninstallOptionList) {
-    Uninstall-Application $app
-}
-
-Write-Host "Disable unnecessary services"
-$VMServicesToDisable = @("SysMain", "DiagTrack", "dmwappushservice", "WSearch", "RetailDemo")
-foreach ($service in $VMServicesToDisable) {
-    Stop-Service -Name $service -Force -ErrorAction SilentlyContinue
-    Set-Service -Name $service -StartupType Disabled
-}
-
-
