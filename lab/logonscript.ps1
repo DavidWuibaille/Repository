@@ -5,8 +5,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 # Configuration options
-$InstallOption = "Chrome"  # Applications to install
-$UninstallOption = "7Zip"  # Applications to uninstall
+$InstallOption = "Chrome,7Zip,ClientIVANTI,ClientTanium,ClientSCCM,ClientKACE"  # Applications to install
+$UninstallOption = "Chrome"  # Applications to uninstall
 $WebShareURL = "https://nas.wuibaille.fr/labo777/DML/"
 $DownloadBasePath = "C:\Windows\Temp\DML"
 
@@ -121,5 +121,48 @@ foreach ($app in $InstallOptionList) {
 foreach ($app in $UninstallOptionList) {
     Uninstall-Application $app
 }
+
+# 🖥️ Virtual Machine Performance Optimization
+Write-Host "⚡ Applying performance optimizations..."
+
+# Disable unnecessary services
+$servicesToDisable = @("SysMain", "DiagTrack", "dmwappushservice", "WSearch", "MapsBroker", "RetailDemo")
+foreach ($service in $servicesToDisable) {
+    Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled
+}
+
+# Disable Windows Firewall
+Write-Host "🚫 Disabling Windows Firewall..."
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+# Disable Windows Defender Real-time Protection
+Write-Host "🛑 Disabling Windows Defender Real-time Protection..."
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+# Disable telemetry scheduled tasks
+Write-Host "📉 Disabling telemetry tasks..."
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+
+# Optimize visual effects
+Write-Host "🎨 Optimizing visual effects..."
+Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2
+
+# Set power plan to High Performance
+Write-Host "⚡ Setting power plan to High Performance..."
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+# Disable hibernation and system restore
+Write-Host "🔋 Disabling hibernation and system restore..."
+powercfg -h off
+Disable-ComputerRestore -Drive "C:\"
+
+# Disable indexing on drive C
+Write-Host "📂 Disabling indexing on drive C..."
+Get-WmiObject Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$false}
+
+# Apply settings immediately
+Write-Host "🔄 Applying settings immediately..."
+gpupdate /force
 
 Write-Host "✅ All configurations applied successfully."
