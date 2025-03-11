@@ -29,43 +29,6 @@ function Enable-ServiceByName ($ServiceName) {
     }
 }
 
-# Gestion des services Tanium
-if ($ServiceStopList -contains "tanium") {
-    Write-Host "Desactivation des services Tanium..."
-    Disable-ServiceByName "Tanium Client"
-    Disable-ServiceByName "TaniumDriverSvc"
-}
-if ($ServiceStartList -contains "tanium") {
-    Write-Host "Activation des services Tanium..."
-    Enable-ServiceByName "Tanium Client"
-    Enable-ServiceByName "TaniumDriverSvc"
-}
-
-# Gestion des services IVANTI
-$IvantiServices = Get-Service | Where-Object { $_.DisplayName -like "Ivanti*" }
-
-if ($ServiceStopList -contains "ivanti") {
-    Write-Host "Desactivation des services IVANTI..."
-    if ($IvantiServices) {
-        foreach ($service in $IvantiServices) {
-            Disable-ServiceByName $service.Name
-        }
-    } else {
-        Write-Host "Aucun service IVANTI trouve."
-    }
-}
-
-if ($ServiceStartList -contains "ivanti") {
-    Write-Host "Activation des services IVANTI..."
-    if ($IvantiServices) {
-        foreach ($service in $IvantiServices) {
-            Enable-ServiceByName $service.Name
-        }
-    } else {
-        Write-Host "Aucun service IVANTI trouve."
-    }
-}
-
 # Fonction pour installer des applications
 function Install-Application ($AppName) {
     if ($AppName -eq "chrome") {
@@ -80,15 +43,35 @@ function Install-Application ($AppName) {
     }
 }
 
-# Installation des applications selectionnees
-if ($InstallOptionList -contains "chrome" -or $InstallOptionList -contains "7zip") {
-    Write-Host "Installation des applications demandees..."
-    foreach ($app in $InstallOptionList) {
-        Install-Application $app
-    }
-} else {
-    Write-Host "Aucune application a installer."
+# Gestion des services Tanium
+if ($ServiceStopList -contains "tanium") {
+    Disable-ServiceByName "Tanium Client"
+    Disable-ServiceByName "TaniumDriverSvc"
 }
+if ($ServiceStartList -contains "tanium") {
+    Enable-ServiceByName "Tanium Client"
+    Enable-ServiceByName "TaniumDriverSvc"
+}
+
+# Gestion des services IVANTI
+$IvantiServices = Get-Service | Where-Object { $_.DisplayName -like "Ivanti*" }
+if ($ServiceStopList -contains "ivanti") {
+    if ($IvantiServices) {
+        foreach ($service in $IvantiServices) { Disable-ServiceByName $service.Name }
+    }
+}
+if ($ServiceStartList -contains "ivanti") {
+    if ($IvantiServices) {
+        foreach ($service in $IvantiServices) { Enable-ServiceByName $service.Name }
+    } 
+}
+
+# Installation des applications selectionnees
+Write-Host "Installation des applications demandees..."
+foreach ($app in $InstallOptionList) {
+    Install-Application $app
+}
+
 
 # Optimisation des performances (toujours appliquee)
 Write-Host "Ajustement des parametres de performance..."
