@@ -103,38 +103,52 @@ $OSName = $OSInfo.Caption
 if ($OSName -match "Windows 10|Windows 11") {
     Write-Host "OS client detecte ($OSName). Application des optimisations..."
 
-    # Desactiver certains services inutiles
-    $servicesToDisable = @("SysMain", "DiagTrack", "dmwappushservice")
+    # Disable unnecessary services
+    $servicesToDisable = @(
+        "SysMain",
+        "DiagTrack",
+        "dmwappushservice",
+        "WSearch",                   # Windows Search
+        "MapsBroker",                # Downloaded Maps Manager
+        "RetailDemo"                 # Retail Demo Service
+    )
     foreach ($service in $servicesToDisable) {
-        Disable-ServiceByName $service
+        Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled -ErrorAction SilentlyContinue
     }
-
-    # Configuration d'un WSUS fantome pour bloquer Windows Update
-    Write-Host "Configuration d'un WSUS fantome..."
-    $RegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"
-    if (!(Test-Path $RegPath)) {
-        New-Item -Path $RegPath -Force | Out-Null
-    }
-    Set-ItemProperty -Path $RegPath -Name "WUServer" -Value "http://127.0.0.1" -Type String
-    Set-ItemProperty -Path $RegPath -Name "WUStatusServer" -Value "http://127.0.0.1" -Type String
-    Set-ItemProperty -Path $RegPath -Name "UseWUServer" -Value 1 -Type DWord
-    Set-ItemProperty -Path "$RegPath\AU" -Name "UseWUServer" -Value 1 -Type DWord
-    Write-Host "WSUS fantome configure."
-
-    # Desactivation du Pare-feu Windows
-    Write-Host "Desactivation du Pare-feu Windows..."
+    
+    # Disable Windows Firewall
+    Write-Host "Disabling Windows Firewall..."
     Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
-    Write-Host "Pare-feu Windows desactive."
-
-    # Desactivation de Microsoft Defender
-    Write-Host "Desactivation de Microsoft Defender..."
-    $DefenderRegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender"
-    if (!(Test-Path $DefenderRegPath)) {
-        New-Item -Path $DefenderRegPath -Force | Out-Null
-    }
-    Set-ItemProperty -Path $DefenderRegPath -Name "DisableAntiSpyware" -Value 1 -Type DWord
-    Set-ItemProperty -Path $DefenderRegPath -Name "DisableRealtimeMonitoring" -Value 1 -Type DWord
-    Write-Host "Microsoft Defender desactive."
+    Write-Host "Windows Firewall disabled."
+    
+    # Disable Windows Defender Real-time Protection
+    Write-Host "Disabling Windows Defender Real-time Protection..."
+    Set-MpPreference -DisableRealtimeMonitoring $true
+    
+    # Disable scheduled tasks for telemetry
+    Write-Host "Disabling scheduled telemetry tasks..."
+    Get-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+    Get-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program\" | Disable-ScheduledTask -ErrorAction SilentlyContinue
+    
+    # Adjust visual effects for performance
+    Write-Host "Optimizing visual effects for performance..."
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Value 2
+    
+    # Set power plan to High Performance
+    Write-Host "Setting power plan to High Performance..."
+    powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+    
+    # Disable hibernation to save disk space
+    Write-Host "Disabling hibernation..."
+    powercfg -h off
+    
+    # Disable system restore
+    Write-Host "Disabling system restore..."
+    Disable-ComputerRestore -Drive "C:\"
+    
+    # Disable indexing on C drive
+    Write-Host "Disabling indexing on drive C..."
+    Get-WmiObject -Class Win32_Volume -Filter "DriveLetter = 'C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$false}
 
     # Appliquer les parametres immediatement
     Write-Host "Application des nouvelles configurations..."
