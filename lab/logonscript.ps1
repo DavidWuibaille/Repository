@@ -74,15 +74,16 @@ function Install-Application {
         foreach ($Script in $InstallScripts) {
             Write-Host "Running: $($Script.FullName)"
             switch ($Script.Extension) {
-                ".bat" { Start-Process -FilePath $Script.FullName -Wait -NoNewWindow }
-                ".cmd" { Start-Process -FilePath $Script.FullName -Wait -NoNewWindow }
-                ".ps1" { Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$($Script.FullName)`"" -Wait -NoNewWindow }
+                ".bat" { Start-Process -FilePath $Script.FullName -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
+                ".cmd" { Start-Process -FilePath $Script.FullName -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
+                ".ps1" { Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$($Script.FullName)`"" -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
             }
         }
     } else {
         Write-Warning "No installation script found for $AppName"
     }
-}  
+}
+
 
 # Function to uninstall an application
 function Uninstall-Application {
@@ -101,15 +102,16 @@ function Uninstall-Application {
         foreach ($Script in $UninstallScripts) {
             Write-Host "Running: $($Script.FullName)"
             switch ($Script.Extension) {
-                ".bat" { Start-Process -FilePath $Script.FullName -Wait -NoNewWindow }
-                ".cmd" { Start-Process -FilePath $Script.FullName -Wait -NoNewWindow }
-                ".ps1" { Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$($Script.FullName)`"" -Wait -NoNewWindow }
+                ".bat" { Start-Process -FilePath $Script.FullName -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
+                ".cmd" { Start-Process -FilePath $Script.FullName -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
+                ".ps1" { Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$($Script.FullName)`"" -WorkingDirectory $AppDownloadPath -Wait -NoNewWindow }
             }
         }
     } else {
         Write-Warning "No uninstall script found for $AppName"
     }
-}  
+}
+
 
 Write-Host "Disabling indexing on drive C"
 Get-WmiObject Win32_Volume -Filter "DriveLetter='C:'" | Set-WmiInstance -Arguments @{IndexingEnabled=$false}
