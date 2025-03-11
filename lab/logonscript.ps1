@@ -44,17 +44,13 @@ function Download-Folder {
         $fileName = [System.IO.Path]::GetFileName($link.href)
         $filePath = Join-Path -Path $Destination -ChildPath $fileName
 
-        Write-Host "Téléchargement de : $fileName..."
-
         try {
             Invoke-WebRequest -Uri $fileUrl -OutFile $filePath
-            Write-Host "Fichier téléchargé : $fileName" -ForegroundColor Green
+            Write-Host "Fichier telecharge : $fileName" -ForegroundColor Green
         } catch {
-            Write-Host "Erreur lors du téléchargement de : $fileName" -ForegroundColor Red
+            Write-Host "Erreur telechargement : $fileName" -ForegroundColor Red
         }
     }
-
-    Write-Host "Téléchargement terminé !" -ForegroundColor Cyan
 }
 
 # Function to install an application
