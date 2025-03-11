@@ -45,7 +45,8 @@ function Download-Folder {
         $filePath = Join-Path -Path $Destination -ChildPath $fileName
 
         try {
-            Invoke-WebRequest -Uri $fileUrl -OutFile $filePath
+            #Invoke-WebRequest -Uri $fileUrl -OutFile $filePath
+            Start-BitsTransfer -Source $fileUrl -Destination $filePath
             Write-Host "Fichier telecharge : $fileName" -ForegroundColor Green
         } catch {
             Write-Host "Erreur telechargement : $fileName" -ForegroundColor Red
