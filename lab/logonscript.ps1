@@ -19,7 +19,8 @@ function Download-Folder {
     if (-not (Test-Path -Path $Destination)) {
         New-Item -ItemType Directory -Path $Destination | Out-Null
     }
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12, [Net.SecurityProtocolType]::Tls13
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 
     write-host "Invoke-WebRequest -Uri $URL -UseBasicParsing"
     # Récupérer le contenu HTML du dossier web
