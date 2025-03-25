@@ -1,8 +1,0 @@
-{
-  "SQL": {
-    "Server": "epm2024.monlab.lan",
-    "Database": "LDMS",
-    "Username": "sa",
-    "Password": "Password1!"
-  }
-}
