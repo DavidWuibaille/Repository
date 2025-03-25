@@ -357,21 +357,21 @@ function Get-HardwareScanDay {
 }
 
 
-$Connection            = Connect-SQLDatabase                     -Server $ServerSQL -Database $database -User $user -Password $PassSQL
+#$Connection            = Connect-SQLDatabase                     -Server $ServerSQL -Database $database -User $user -Password $PassSQL
 #$Application1          = Get-ApplicationData                     -Connection $Connection -AppFilter $ApplicationFilter1
 #$Application2          = Get-ApplicationData                     -Connection $Connection -AppFilter $ApplicationFilter2
-$BitlockerDetails      = Get-BitlockerDetails                    -Connection $Connection
-$WindowsDetails        = Get-WindowsDetails                      -Connection $Connection
-$WorkstationModels     = Get-WorkstationModels                   -Connection $Connection
-$WorkstationMakes      = Get-WorkstationManufacturers            -Connection $Connection
+#$BitlockerDetails      = Get-BitlockerDetails                    -Connection $Connection
+#$WindowsDetails        = Get-WindowsDetails                      -Connection $Connection
+#$WorkstationModels     = Get-WorkstationModels                   -Connection $Connection
+#$WorkstationMakes      = Get-WorkstationManufacturers            -Connection $Connection
 #$Variable1             = Get-EnvironmentVariables                -Connection $Connection -VariableName $VariableFilter1
 #$HardwareScanDay       = Get-HardwareScanDay                     -Connection $Connection
-$WindowsgroupesVersion = $WindowsDetails    | Group-Object -Property VERSION
-$BitlockerStatus       = $BitlockerDetails  | Group-Object -Property Bitlocker
-$Modelscount           = $WorkstationModels | Group-Object -Property MODEL
-$Makesount             = $WorkstationMakes  | Group-Object -Property MANUFACTURER
+#$WindowsgroupesVersion = $WindowsDetails    | Group-Object -Property VERSION
+#$BitlockerStatus       = $BitlockerDetails  | Group-Object -Property Bitlocker
+#$Modelscount           = $WorkstationModels | Group-Object -Property MODEL
+#$Makesount             = $WorkstationMakes  | Group-Object -Property MANUFACTURER
 #$ScanDaycount          = HardwareScanDay    | Group-Object -Property SCAN_CATEGORY
-Close-SQLConnection -Connection $Connection
+#Close-SQLConnection -Connection $Connection
 
 
 
