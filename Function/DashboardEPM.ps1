@@ -185,49 +185,54 @@ function Close-SQLConnection {
 
 
 function Get-WorkstationModels {
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
         [System.Data.SqlClient.SqlConnection]$Connection
     )
 
-    # Initialiser la collection pour stocker les données
-    $WorkstationModels = @()
+    # Initialize the collection to store results
+    $workstationModels = New-Object System.Collections.Generic.List[object]
 
-    # Définir la requête SQL
+    # Define the SQL query
     $query = @"
-        SELECT DISTINCT A0.DISPLAYNAME, A1.MODEL
-        FROM Computer A0 (nolock)
-        LEFT OUTER JOIN CompSystem A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
-        WHERE (A0.Computer_Idn NOT IN (
-            SELECT Computer_Idn 
-            FROM Computer 
-            WHERE TYPE LIKE N'%Server%'
-        ))
-        ORDER BY A0.DISPLAYNAME
+SELECT DISTINCT 
+    A0.DISPLAYNAME, 
+    A1.MODEL, 
+    A2.OSTYPE  
+FROM 
+    Computer A0 WITH (NOLOCK)
+    LEFT JOIN CompSystem A1 WITH (NOLOCK) ON A0.Computer_Idn = A1.Computer_Idn
+    LEFT JOIN Operating_System A2 WITH (NOLOCK) ON A0.Computer_Idn = A2.Computer_Idn
+WHERE 
+    A0.Computer_Idn NOT IN (
+        SELECT Computer_Idn FROM Computer WHERE TYPE LIKE N'%Server%'
+    )
+ORDER BY 
+    A0.DISPLAYNAME
 "@
 
-    # Exécuter la requête et charger les résultats
+    Write-Verbose "Executing SQL query to retrieve workstation models."
+
+    # Execute the query
     $table = Get-SqlData -Connection $Connection -Query $query
 
-    # Parcourir les résultats et remplir la collection
-    foreach ($element in $table) {
-        # Vérifier si le modèle est vide, ne contient que des espaces ou est égal à "Default string"
-        $modelValue = if ([string]::IsNullOrWhiteSpace($element.MODEL) -or $element.MODEL -eq "Default string") {
-            "No Data"
+    foreach ($row in $table) {
+        # Clean model value
+        $modelValue = if ([string]::IsNullOrWhiteSpace($row.MODEL) -or $row.MODEL -eq 'Default string') {
+            'No Data'
         } else {
-            $element.MODEL
+            $row.MODEL
         }
 
-        $WorkstationModels += [PSCustomObject]@{
-            'DEVICENAME' = $element.DISPLAYNAME
-            'MODEL'      = $modelValue
-        }
+        $workstationModels.Add([PSCustomObject]@{
+            DEVICENAME = $row.DISPLAYNAME
+            MODEL      = $modelValue
+        })
     }
 
-    # Retourner la collection d'objets
-    return $WorkstationModels
+    return $workstationModels
 }
-
 
 function Get-WorkstationManufacturers {
     param (
