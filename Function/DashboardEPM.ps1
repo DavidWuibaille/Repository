@@ -228,6 +228,7 @@ ORDER BY
         $workstationModels.Add([PSCustomObject]@{
             DEVICENAME = $row.DISPLAYNAME
             MODEL      = $modelValue
+            OS         = $row.OSTYPE
         })
     }
 
