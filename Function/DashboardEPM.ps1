@@ -101,7 +101,10 @@ function Get-BitlockerDetails {
         LEFT OUTER JOIN BitLocker A3 (nolock) ON A0.Computer_Idn = A3.Computer_Idn
         LEFT OUTER JOIN TPMSystem A4 (nolock) ON A0.Computer_Idn = A4.Computer_Idn
         LEFT OUTER JOIN CompSystem A5 (nolock) ON A0.Computer_Idn = A5.Computer_Idn
-        WHERE (A1.OSTYPE LIKE N'%Windows%')
+        WHERE 
+            A0.Computer_Idn NOT IN (
+                SELECT Computer_Idn FROM Computer WHERE TYPE LIKE N'%Server%'
+            )
         ORDER BY A0.DISPLAYNAME
 "@
 
@@ -141,7 +144,10 @@ function Get-WindowsDetails {
         FROM Computer A0 (nolock)
         LEFT OUTER JOIN Operating_System A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
         LEFT OUTER JOIN OSNT A2 (nolock) ON A0.Computer_Idn = A2.Computer_Idn
-        WHERE (A1.OSTYPE LIKE N'%Windows%')
+        WHERE 
+            A0.Computer_Idn NOT IN (
+                SELECT Computer_Idn FROM Computer WHERE TYPE LIKE N'%Server%'
+            )
         ORDER BY A0.DISPLAYNAME
 "@
 
