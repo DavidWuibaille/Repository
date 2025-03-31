@@ -138,33 +138,42 @@ function Get-WindowsDetails {
     # Initialiser la collection pour stocker les données
     $WindowsDetails = @()
 
-    # Définir la requête SQL avec le filtre dynamique pour le système d'exploitation
+    # Requête SQL
     $query = @"
-        SELECT DISTINCT A0.DISPLAYNAME, A1.OSTYPE, A2.CURRENTBUILD, A2.UBR
-        FROM Computer A0 (nolock)
-        LEFT OUTER JOIN Operating_System A1 (nolock) ON A0.Computer_Idn = A1.Computer_Idn
-        LEFT OUTER JOIN OSNT A2 (nolock) ON A0.Computer_Idn = A2.Computer_Idn
+        SELECT DISTINCT 
+            A0.DISPLAYNAME, 
+            A1.OSTYPE, 
+            A2.CURRENTBUILD, 
+            A2.UBR
+        FROM 
+            Computer A0 (NOLOCK)
+            LEFT OUTER JOIN Operating_System A1 (NOLOCK) ON A0.Computer_Idn = A1.Computer_Idn
+            LEFT OUTER JOIN OSNT A2 (NOLOCK) ON A0.Computer_Idn = A2.Computer_Idn
         WHERE 
             A0.Computer_Idn NOT IN (
                 SELECT Computer_Idn FROM Computer WHERE TYPE LIKE N'%Server%'
             )
-        ORDER BY A0.DISPLAYNAME
+        ORDER BY 
+            A0.DISPLAYNAME
 "@
 
-    # Exécuter la requête et charger les résultats
+    # Exécuter la requête
     $table = Get-SqlData -Connection $Connection -Query $query
 
-    # Parcourir les résultats et remplir la collection
     foreach ($element in $table) {
-        $versionFull  = "$($element.CURRENTBUILD).$($element.UBR)"  # Version complète
+        # Nettoyage version lisible via fonction externe
+        $versionCode = Clean-WindowsVersion -OSType $element.OSTYPE -Build $element.CURRENTBUILD
+
+        # Construction du champ VERSION complet
+        $versionFull = "$versionCode.$($element.UBR)"
+
         $WindowsDetails += [PSCustomObject]@{
-            'DEVICENAME' = $element.DISPLAYNAME
-            'VERSION'    = $versionFull
+            DEVICENAME = $element.DISPLAYNAME
+            VERSION    = $versionFull
         }
     }
-    $WindowsDetails = $WindowsDetails | Sort-Object VERSION
-    # Retourner la collection d'objets
-    return $WindowsDetails
+
+    return $WindowsDetails | Sort-Object VERSION
 }
 
 
@@ -186,6 +195,65 @@ function Close-SQLConnection {
         # Gestion des erreurs
         Write-Host "------ Error closing the connection."
         Write-Host "------ Error details: $_"
+    }
+}
+
+function Clean-WindowsVersion {
+    param (
+        [string]$OSType,
+        [string]$Build
+    )
+
+    # Hashtable principale
+    $buildMap = @{
+        # Windows 11
+        '22621' = 'w11_22H2'
+        '22631' = 'w11_23H2'
+
+        # Windows 10 - Standard
+        '19041' = 'w10_2004'
+        '19042' = 'w10_20H2'
+        '19043' = 'w10_21H1'
+        '19044' = 'w10_22H2'  # Peut être override via OSTYPE
+        '19045' = 'w10_22H2'
+
+        # Windows 10 - LTSC / LTSB
+        '17763' = 'w10_LTSC2019'
+        '14393' = 'w10_LTSB2016'
+
+        # Windows 8.x / 7
+        '9600'  = 'w81'
+        '9200'  = 'w8'
+        '7601'  = 'w7_sp1'
+
+        # Windows Server
+        '17763_srv' = 'ws2019'
+        '20348'     = 'ws2022'
+        '25398'     = 'ws2025'
+    }
+
+    # Gestion spéciale de certains builds ambigus
+    if ($Build -eq '19044' -and $OSType -like '*LTSC 2021*') {
+        return 'w10_LTSC2021'
+    }
+
+    if ($Build -eq '17763' -and $OSType -like '*Server*') {
+        return $buildMap['17763_srv']
+    }
+
+    if ($Build -eq '14393' -and $OSType -like '*Server*') {
+        return 'ws2016'
+    }
+
+    if ($buildMap.ContainsKey($Build)) {
+        return $buildMap[$Build]
+    }
+
+    # Fallback dynamique
+    if ($OSType -like '*Server*') {
+        return "ws_build$Build"
+    } else {
+        return "win_build$Build"
     }
 }
 
