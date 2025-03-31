@@ -136,6 +136,7 @@ function Get-WindowsDetails {
     )
 
     $WindowsDetails = @()
+    $SkippedDevices = @()
 
     $query = @"
         SELECT DISTINCT 
@@ -155,29 +156,44 @@ function Get-WindowsDetails {
             A0.DISPLAYNAME
 "@
 
-    # Exécute la requête
+    # Exécute la requête SQL
     $table = Get-SqlData -Connection $Connection -Query $query
 
-    # Étape 1 : enrichir les données avec Clean-WindowsVersion
+    # Étape 1 : enrichir les données avec Clean-WindowsVersion + vérif UBR
     $enriched = foreach ($element in $table) {
         $versionCode = Clean-WindowsVersion -OSType $element.OSTYPE -Build $element.CURRENTBUILD
-        [PSCustomObject]@{
-            DEVICENAME   = $element.DISPLAYNAME
-            VERSIONCODE  = $versionCode
-            UBR          = [int]$element.UBR
+
+        $ubrValue = if ([string]::IsNullOrWhiteSpace($element.UBR)) {
+            $null
+        } else {
+            try {
+                [int]$element.UBR
+            } catch {
+                $null
+            }
+        }
+
+        if ($null -ne $ubrValue) {
+            [PSCustomObject]@{
+                DEVICENAME   = $element.DISPLAYNAME
+                VERSIONCODE  = $versionCode
+                UBR          = $ubrValue
+            }
+        } else {
+            $SkippedDevices += $element.DISPLAYNAME
         }
     }
 
-    # Étape 2 : trouver les top 3 UBR par VERSIONCODE
+    # Étape 2 : trouver les 3 derniers UBR par version
     $versionGroups = $enriched | Group-Object VERSIONCODE
-
     $ubrKeepMap = @{}
+
     foreach ($group in $versionGroups) {
         $topUBRs = $group.Group | Sort-Object UBR -Descending | Select-Object -First 3
         $ubrKeepMap[$group.Name] = $topUBRs.UBR
     }
 
-    # Étape 3 : construire la liste finale
+    # Étape 3 : création des résultats finaux
     $finalList = foreach ($entry in $enriched) {
         $versionCode = $entry.VERSIONCODE
         $ubr         = $entry.UBR
@@ -192,6 +208,12 @@ function Get-WindowsDetails {
             DEVICENAME = $entry.DEVICENAME
             VERSION    = "$versionCode.$ubrTag"
         }
+    }
+
+    # Optionnel : afficher les machines ignorées (sans UBR)
+    if ($SkippedDevices.Count -gt 0) {
+        Write-Warning "Les machines suivantes n'ont pas de valeur UBR valide et ont été ignorées :"
+        $SkippedDevices | ForEach-Object { Write-Host " - $_" -ForegroundColor Yellow }
     }
 
     return $finalList | Sort-Object VERSION
