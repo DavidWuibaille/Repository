@@ -135,10 +135,8 @@ function Get-WindowsDetails {
         [System.Data.SqlClient.SqlConnection]$Connection
     )
 
-    # Initialiser la collection pour stocker les données
     $WindowsDetails = @()
 
-    # Requête SQL
     $query = @"
         SELECT DISTINCT 
             A0.DISPLAYNAME, 
@@ -157,24 +155,48 @@ function Get-WindowsDetails {
             A0.DISPLAYNAME
 "@
 
-    # Exécuter la requête
+    # Exécute la requête
     $table = Get-SqlData -Connection $Connection -Query $query
 
-    foreach ($element in $table) {
-        # Nettoyage version lisible via fonction externe
+    # Étape 1 : enrichir les données avec Clean-WindowsVersion
+    $enriched = foreach ($element in $table) {
         $versionCode = Clean-WindowsVersion -OSType $element.OSTYPE -Build $element.CURRENTBUILD
-
-        # Construction du champ VERSION complet
-        $versionFull = "$versionCode.$($element.UBR)"
-
-        $WindowsDetails += [PSCustomObject]@{
-            DEVICENAME = $element.DISPLAYNAME
-            VERSION    = $versionFull
+        [PSCustomObject]@{
+            DEVICENAME   = $element.DISPLAYNAME
+            VERSIONCODE  = $versionCode
+            UBR          = [int]$element.UBR
         }
     }
 
-    return $WindowsDetails | Sort-Object VERSION
+    # Étape 2 : trouver les top 3 UBR par VERSIONCODE
+    $versionGroups = $enriched | Group-Object VERSIONCODE
+
+    $ubrKeepMap = @{}
+    foreach ($group in $versionGroups) {
+        $topUBRs = $group.Group | Sort-Object UBR -Descending | Select-Object -First 3
+        $ubrKeepMap[$group.Name] = $topUBRs.UBR
+    }
+
+    # Étape 3 : construire la liste finale
+    $finalList = foreach ($entry in $enriched) {
+        $versionCode = $entry.VERSIONCODE
+        $ubr         = $entry.UBR
+
+        $ubrTag = if ($ubrKeepMap[$versionCode] -contains $ubr) {
+            "$ubr"
+        } else {
+            "old"
+        }
+
+        [PSCustomObject]@{
+            DEVICENAME = $entry.DEVICENAME
+            VERSION    = "$versionCode.$ubrTag"
+        }
+    }
+
+    return $finalList | Sort-Object VERSION
 }
+
 
 
 function Close-SQLConnection {
