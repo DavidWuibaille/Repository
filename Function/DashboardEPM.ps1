@@ -189,6 +189,41 @@ function Close-SQLConnection {
     }
 }
 
+function Clean-OSType {
+    param (
+        [string]$OSType
+    )
+
+    if (-not $OSType) { return "Unknown OS" }
+
+    $os = $OSType
+
+    # Nettoyage de base
+    $os = $os -replace ',\s*64-bit', ''
+    $os = $os -replace 'Microsoft\s+', ''
+    $os = $os -replace '\s+Edition', ''
+
+    # Patterns à détecter
+    $patterns = @(
+        @{ Pattern = 'Windows\s+10\s+Enterprise\s+2016\s+LTSB'; Replacement = 'Windows 10 LTSB 2016' },
+        @{ Pattern = 'Windows\s+10\s+Enterprise\s+LTSC\s+2019'; Replacement = 'Windows 10 LTSC 2019' },
+        @{ Pattern = 'Windows\s+10\s+Enterprise\s+LTSC\s+2021'; Replacement = 'Windows 10 LTSC 2021' },
+        @{ Pattern = 'Windows\s+10\s+Enterprise';              Replacement = 'Windows 10 Enterprise' },
+        @{ Pattern = 'Windows\s+11\s+Enterprise';              Replacement = 'Windows 11 Enterprise' },
+        @{ Pattern = 'Windows\s+10\s+IoT\s+Enterprise';         Replacement = 'Windows 10 IoT Enterprise' },
+        @{ Pattern = 'Windows\s+Server\s+(\d+)\s+Datacenter';   Replacement = 'Windows Server $1 Datacenter' },
+        @{ Pattern = 'Windows\s+Server\s+(\d+)\s+Standard';     Replacement = 'Windows Server $1 Standard' }
+    )
+
+    foreach ($p in $patterns) {
+        if ($os -match $p.Pattern) {
+            return ($os -replace $p.Pattern, $p.Replacement)
+        }
+    }
+
+    # Fallback : retourne nom nettoyé
+    return $os
+}
 
 function Get-WorkstationModels {
     [CmdletBinding()]
@@ -197,10 +232,8 @@ function Get-WorkstationModels {
         [System.Data.SqlClient.SqlConnection]$Connection
     )
 
-    # Initialize the collection to store results
     $workstationModels = New-Object System.Collections.Generic.List[object]
 
-    # Define the SQL query
     $query = @"
 SELECT DISTINCT 
     A0.DISPLAYNAME, 
@@ -210,31 +243,27 @@ FROM
     Computer A0 WITH (NOLOCK)
     LEFT JOIN CompSystem A1 WITH (NOLOCK) ON A0.Computer_Idn = A1.Computer_Idn
     LEFT JOIN Operating_System A2 WITH (NOLOCK) ON A0.Computer_Idn = A2.Computer_Idn
-WHERE 
-    A0.Computer_Idn NOT IN (
-        SELECT Computer_Idn FROM Computer WHERE TYPE LIKE N'%Server%'
-    )
 ORDER BY 
     A0.DISPLAYNAME
 "@
 
     Write-Verbose "Executing SQL query to retrieve workstation models."
 
-    # Execute the query
     $table = Get-SqlData -Connection $Connection -Query $query
 
     foreach ($row in $table) {
-        # Clean model value
         $modelValue = if ([string]::IsNullOrWhiteSpace($row.MODEL) -or $row.MODEL -eq 'Default string') {
             'No Data'
         } else {
             $row.MODEL
         }
 
+        $cleanOS = Clean-OSType -OSType $row.OSTYPE
+
         $workstationModels.Add([PSCustomObject]@{
             DEVICENAME = $row.DISPLAYNAME
             MODEL      = $modelValue
-            OS         = $row.OSTYPE
+            OS         = $cleanOS
         })
     }
 
