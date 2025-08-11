@@ -1,0 +1,8 @@
+# Ignore local config.json
+config.json
+
+# Ignore log files
+*.log
+
+# Ignore CSV exports
+*.csv
