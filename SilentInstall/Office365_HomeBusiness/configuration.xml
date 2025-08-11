@@ -1,0 +1,13 @@
+<!-- download.xml - This XML file downloads Office 2013 Home & Business 32-bit -->
+<Configuration>
+  <Add SourcePath="\\fileserver\DML\LANDESK\Applications\Office\2016_365_HomeBusiness_x64" OfficeClientEdition="32" >
+<Product ID="HomeBusinessRetail">
+<Language ID="fr-fr" />
+</Product>
+</Add>
+  <Updates Enabled="FALSE" />
+ 
+  <Display Level="Full" AcceptEULA="TRUE" />
+  <Logging Level="Standard" Path="c:\Windows\Temp" />
+  <Property Name="AUTOACTIVATE" Value="0" />
+</Configuration>

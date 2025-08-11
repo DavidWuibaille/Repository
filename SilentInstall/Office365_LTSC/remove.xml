@@ -1,0 +1,6 @@
+<Remove>
+  <Remove All="TRUE" />
+  <Display Level="None" AcceptEULA="TRUE" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Logging Level="Standard" Path="C:\windows\temp" />
+</Remove>
