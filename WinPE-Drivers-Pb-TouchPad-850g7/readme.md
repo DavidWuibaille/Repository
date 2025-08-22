@@ -11,19 +11,19 @@ HP confirmed this is related to a **missing chipset driver**:
 1. Mount the WinPE image:
    ```powershell
    dism /mount-wim /wimfile:"\\ServeurLDMS\ldmain\landesk\vboot\boot_x64.wim" /index:1 /mountdir:c:\mount
- ```
+   ```
  
 2. Inject the touchpad drivers:
 
    ```powershell
 Dism /Image:C:\mount /Add-Driver /Driver:"c:\WinPEDriversPbTouchPadx64" /Recurse
- ```
+   ```
 
 3. Commit and unmount:
 
    ```powershell
 Dism /unmount-wim /mountdir:c:\mount /commit
- ```
+   ```
  
  ## ⚠️ Notes  
 - Make sure the drivers in `c:\WinPEDriversPbTouchPadx64` are the correct ones for your HP model.  
