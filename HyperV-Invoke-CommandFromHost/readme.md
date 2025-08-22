@@ -25,7 +25,7 @@ It fetches scripts from a remote repository and executes them in guest OSes with
 1. Launch the script on the **Hyper-V host**:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\HyperV-GuestScriptRunner.ps1
-```
+   ```
 
 
 Enter guest **username and password**.  
