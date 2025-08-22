@@ -14,15 +14,13 @@ HP confirmed this is related to a **missing chipset driver**:
    ```
  
 2. Inject the touchpad drivers:
-
    ```powershell
-Dism /Image:C:\mount /Add-Driver /Driver:"c:\WinPEDriversPbTouchPadx64" /Recurse
+   Dism /Image:C:\mount /Add-Driver /Driver:"c:\WinPEDriversPbTouchPadx64" /Recurse
    ```
 
 3. Commit and unmount:
-
    ```powershell
-Dism /unmount-wim /mountdir:c:\mount /commit
+   Dism /unmount-wim /mountdir:c:\mount /commit
    ```
  
  ## ⚠️ Notes  
