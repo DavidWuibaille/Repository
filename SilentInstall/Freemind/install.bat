@@ -1,1 +1,0 @@
-"%~dp0FreeMind-Windows-Installer-1.0.1-max.exe" /VERYSILENT

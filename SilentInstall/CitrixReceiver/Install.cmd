@@ -1,1 +1,0 @@
-"%~dp0CitrixReceiver.exe" /silent ADDLOCAL="ReceiverInside,ICA_Client,USB,DesktopViewer,Flash,Vd3d" ENABLE_SSON=no ENABLE_DYNAMIC_CLIENT_NAME=Yes

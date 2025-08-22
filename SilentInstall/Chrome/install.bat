@@ -1,1 +1,0 @@
-msiexec /i "%~dp0googlechromestandaloneenterprise64.msi" /qn
