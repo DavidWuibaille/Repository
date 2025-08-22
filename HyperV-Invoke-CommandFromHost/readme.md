@@ -28,15 +28,11 @@ It fetches scripts from a remote repository and executes them in guest OSes with
    ```
 
 
-Enter guest **username and password**.  
-
-Refresh and select **scripts** from the remote repository.  
-
-Select one or multiple **running VMs**.  
-
-(Optional) Check **Run gpupdate /force**.  
-
-Click **Run on Selected VMs**.  
+- Enter guest **username and password**.  
+- Refresh and select **scripts** from the remote repository.  
+- Select one or multiple **running VMs**.  
+- (Optional) Check **Run gpupdate /force**.  
+- Click **Run on Selected VMs**.  
 
 The **log panel** will display progress and results per VM.  
 
