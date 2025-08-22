@@ -23,7 +23,7 @@ This PowerShell script automates the **export and backup of Hyper-V virtual mach
    
 2. Run the script:
    ```powershell
-powershell -ExecutionPolicy Bypass -File .\Backup-HyperV.ps1
+   powershell -ExecutionPolicy Bypass -File .\Backup-HyperV.ps1
    ```
 
 3. All VMs with Backup_ in their name will be exported and copied to the backup location.
