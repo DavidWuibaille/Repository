@@ -1,0 +1,1 @@
+(Get-Content "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Preferences").replace('"exit_type":"Crashed"', '"exit_type":"Normal"') | Set-Content "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Preferences"
