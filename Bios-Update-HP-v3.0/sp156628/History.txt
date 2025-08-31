@@ -1,0 +1,462 @@
+			Revision History
+			S30 ROM Family
+
+
+Models Supported:	HP Engage One Pro AIO System
+
+Version 02.22.00
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+        SIO Firmware, version 09.08.25
+        Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+        Intel GOP EFI Driver, version 9.0.1107.A.11
+        USB Type-C PD firmware FW 6.8.0
+        Management Engine (ME) Firmware, version 14.1.75.2420
+        Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  -Enhancement to address security vulnerabilities CVE-2024-24853
+	  -Enhancement to address security vulnerabilities CVE-2023-41833,CVE-2023-23904,CVE-2023-22351,CVE-2023-25546
+	  -Enhancement to address security vulnerabilities CVE-2023-34424, CVE-2023-38655,CVE-2024-21844,CVE-2023-48361
+	  -Enhancement to address security vulnerabilities CVE-2023-45229, CVE-2023-45230, CVE-2023-45231, CVE-2023-45232, CVE-2023-45233, CVE-2023-45234, CVE-2023-45235, CVE-2023-45236, CVE-2023-45237
+	  -Enhancement to address security vulnerabilities CVE-2024-5477
+
+	FIXES: 
+	  -Fixes the issue where the system shows the memory manufacturer information as "Unknow - [0X0B83]" in setup menu for  memory option with Nanya (TM) 8G Memory .
+
+		PCR0(with TPM2.0 SHA256) = A301B32E762783083FCF07D63B60F3B5C461DAA2ED8C946AA315309555594866
+
+Version 02.21.00
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+        SIO Firmware, version 09.08.24
+        Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+        Intel GOP EFI Driver, version 9.0.1107.A.11
+        USB Type-C PD firmware FW 6.8.0
+        Management Engine (ME) Firmware, version 14.1.74.2355
+        Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  - Improve stability
+
+	FIXES: 
+	  - None
+
+		PCR0(with TPM2.0 SHA256) = FF48A97755D53621E8D5615AE03E12F718791FD86DED2BEAD6DE8563A735B494
+
+Version 02.20.01
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+        SIO Firmware, version 09.08.24
+        Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+        Intel GOP EFI Driver, version 9.0.1107.A.11
+        USB Type-C PD firmware FW 6.8.0
+        Management Engine (ME) Firmware, version 14.1.74.2355
+        Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2024-24853
+	  - Enhancement to address security vulnerabilities CVE-2023-41833, CVE-2023-23904, CVE-2023-22351, CVE-2023-25546
+	  - Enhancement to address security vulnerabilities CVE-2023-34424, CVE-2023-38655, CVE-2024-21844, CVE-2023-48361
+	  - Enhancement to address security vulnerabilities
+  	    CVE-2023-45229, CVE-2023-45230, CVE-2023-45231, CVE-2023-45232, CVE-2023-45233, CVE-2023-45234, CVE-2023-45235, CVE-2023-45236, CVE-2023-45237
+	  - Enhancement to address security vulnerabilities CVE-2024-5477
+
+	FIXES: 
+	  - Fixes the issue where the system shows the memory manufacturer information as "Unknow - [0X0B83]" in setup menu for  memory option with Nanya (TM) 8G Memory .
+
+		PCR0(with TPM2.0 SHA256) = 4DA0FA18E1648C4262E0F3716E59AB61ABA9928B2D89B68BDEEC21A1E1B0F0A6
+
+Version 02.20.00
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+        SIO Firmware, version 09.08.23
+        Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+        Intel GOP EFI Driver, version 9.0.1107.A.11
+        USB Type-C PD firmware FW 6.8.0
+        Management Engine (ME) Firmware, version 14.1.74.2355
+        Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2024-24853
+	  - Enhancement to address security vulnerabilities CVE-2023-41833,CVE-2023-23904,CVE-2023-22351,CVE-2023-25546
+	  - Enhancement to address security vulnerabilities CVE-2023-34424, CVE-2023-38655,CVE-2024-21844,CVE-2023-48361
+	  - Enhancement to address security vulnerabilities
+	  CVE-2023-45229, CVE-2023-45230, CVE-2023-45231, CVE-2023-45232, CVE-2023-45233, CVE-2023-45234, CVE-2023-45235, CVE-2023-45236, CVE-2023-45237
+
+	FIXES: 
+	  - Fixes the issue where the system shows the memory manufacturer information as "Unknow - [0X0B83]" in setup menu for  memory option with Nanya (TM) 8G Memory
+
+		PCR0(with TPM2.0 SHA256) = 786CE64EF93CBEBD990CEB5C7B5C9F06040810D08D17CD812454A778FAE7F3EA
+
+Version 02.18.01
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+        SIO Firmware, version 09.08.23
+        Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+        Intel GOP EFI Driver, version 9.0.1107.A.11
+        USB Type-C PD firmware FW 6.8.0
+        Management Engine (ME) Firmware, version 14.1.72.2287
+        Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  - Updates Intel MCU for compatibility enhancement
+          - Enhancement to address security vulnerabilities CVE-2023-32282
+          - Enhancement to address security vulnerabilities CVE-2023-28389, CVE-2023-27502 and CVE-2023-32633
+          - Enhancement to address security vulnerabilities CVE-2023-28402, CVE-2023-27504 and CVE-2023-28383
+
+	FIXES: 
+
+		PCR0(with TPM2.0 SHA256) = 33985C5A7B32AF34B1B50F2310470EF6022F5DE3DCC76A0F46EF3C9FD22A855A
+
+Version 02.17.01
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.23
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.70.2228
+	Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.041
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2023-25756, CVE-2023-22329
+	  - Enhancement to support SMBIOS type1 version string for 'db' addition.
+	  - Enhancements to secure boot keys protection.
+	  - HP strongly recommends updating system BIOS to address a potential issue with HP Sure Start that can cause some devices to experience a SecureBoot error at boot.
+
+	FIXES: 
+	  - Fixes issue where System cannot create POST Power-On Password when selecting "Create POST Power-On Password" and entering the pin provided by the "Phone App" after creating the BIOS Administrator Password with EBAM.
+ 	  - Fixes issue where Power-On Authentication with fingerprint would not function.
+	  - Fixes issue where FUR GUI would report “Incorrect password was entered” when flashing BIOS with correct password after setting EBAM and BIOS admin password.
+
+		PCR0(with TPM2.0 SHA256) = 2C5F850CD9826B6DA955972DF15874FB259D4E644FF84E3E47C370E51B225AE1
+
+Version 02.16.20
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.23
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.70.2228
+	Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+
+	FIXES: 
+	  - HP strongly recommends updating system BIOS to address a potential issue with HP Sure Start that can cause some devices to enter into an unrecoverable state.
+
+		PCR0(with TPM2.0 SHA256) = 5FBF73CD7D6BC55EB407E6E975BB27E7F0F78A46AC096CD4DD72BC1E8AB2DA83
+
+Version 02.16.00
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.23
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.70.2228
+	Intel UEFI PXE Driver, version 0.2.1
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2022-40982
+	  - Enhancement to address security vulnerabilities CVE-2022-43505, CVE-2022-44611
+	  - Enhancement to address security vulnerabilities CVE-2022-29871, CVE-2022-36392
+	  - Add "Network Boot TFTP Window Size" setting to F10/Public WMI
+	  - Implement new feature to clear pw by RTC battery removal & add "Clear BIOS Passwords on RTC Battery Removal" under Security tab in F10.
+	  - Integrate Infineon TPM EFI Driver v02.02.3776.00
+
+	FIXES:  
+	  - Fixes black screen issue on 23" under F10 by rollbacking GOP driver.
+	  - Fixes an issue where KBC version format is not match in system information and release note.
+
+		PCR0(with TPM2.0 SHA256) = E700143450FFE0950F9F522535B8F6E1C2E39B21D245AB721FC4F8F82A303A46
+
+Version 02.15.01 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.23
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1113.A.2
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.67.2046
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+	  - Updates the Intel i225-V EFI Driver to 0.10.5 for compatibility enhancement
+	  - Enhancement to address security vulnerabilities CVE-2022-33894
+	  - Updates the Intel silicon MCU for compatibility enhancement
+	  - Updates the Intel GOP EFI Driver to 9.0.1113 for compatibility enhancement
+	  - Updates the PD firmware to 1.2 for the system USB-C power on compatibility Enhancement
+	  - Enhancement to support new feature that POST error will indicate QR code and URL to the proper HP Support documentation.
+	  - Add ExtendedDHCPTimeout support in BIOS setup menu.
+	  - Enhancement to address security vulnerabilities CVE-2022-3602, CVE-2022-3786.
+	FIXES:  
+	  - Fixes issue where System cannot to create POST Power-On Password when select "Create POST Power-On Password" and enter the pin provided by the "Phone App" after creating the BIOS Administrator Password with EBAM.
+
+		PCR0(with TPM2.0 SHA256) = 6FD724D84980E7C778B69BF7AF33F9ACD90F505E0854796AA10E8210112B94DC
+
+Version 02.14.00 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.23
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.67.2046
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2022-27541 
+	  - Enhance potentially ROM crash risk causes system  no power and no LED lights. 
+	  - Enhancement to address security vulnerabilities CVE-2022-33894
+	  - Enhancement to address security vulnerabilities CVE-2022-43777  
+	  - Enhancement to address security vulnerabilities CVE-2022-43778 
+	  - Updates the Intel silicon reference code for compatibility enhancement
+	  - Enhancement to address security vulnerabilities CVE-2022-27539 
+	  - Add  wireless 5GHz frequency supported  for Indonesia
+	  - Updates basic HP PC Hardware Diagnostics utility to 2.3.1.0.
+	FIXES:  
+	  - Fixes issue where  BIOS Administrator password/Power on password can be accepted when the password length is less than Password Minimum Length.
+	  - Fixes an issue where the user is unable to enter F10 BIOS menu via keyboard or unable to boot to USB storage if plug specific USB Cash Drawer. 
+
+		PCR0(with TPM2.0 SHA256) = 2178FBFF9227737DB04DA4447758A6BB8C27F614E2B54ABDB4D3BF95B0EA7D44
+
+Version 02.13.00 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.22
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.67.2046
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2022-21198
+	  - Enhancement to address security vulnerabilities CVE-2022-26845, CVE-2022-29893, CVE-2022-27497, CVE-2022-33159
+	  - Updates the CPU microcode for Intel processors for stability enhancement.
+	  - Updates basic HP PC Hardware Diagnostics utility to 2.3.0.0.
+	  - Enhancement to address security vulnerabilities CVE-2022-27541.
+	  - Enhancement to address security vulnerabilities CVE-2022-27538.
+	FIXES:  
+	  
+
+		PCR0(with TPM2.0 SHA256) = 75611466D169E589BDD5B5387492A0207E39FAC3B9DE2DFA97DF220F94FD7B6D
+
+Version 02.12.01 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.22
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.8.0
+	Management Engine (ME) Firmware, version 14.1.65.1990
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+	  - Add option "Second Power Button Startup Menu" to control boot to menu via power button.
+	  - Enhancement to update Intel Management Engine firmware to 14.1.65.1990.
+	  - Enhancement to improve connection stability when running HP Sure Recover.
+	  - Enhancement to address security vulnerabilities CVE-2022-31644, CVE-2022-31645, CVE-2022-31646, CVE-2022-27537.
+	  - Enhancement to address security vulnerabilities CVE-2022-31640, CVE-2022-31641, CVE-2022-31642.
+	  - Enhancement to address security vulnerabilities CVE-2022-31635, CVE-2022-31636, CVE-2022-31637, CVE-2022-31638, CVE-2022-31639.
+	  - Update Super IO 18.9 firmware to v9.8.22.
+	FIXES:  
+	  - Fixes an issue where sometimes D32- D38system shut down unexpectedly
+	  - Fixes issue where system failure to boot on multiple boot entries with unique description.
+
+		PCR0(with TPM2.0 SHA256) = 988E44ADE2C9055DD50C30D505E5B7E266C25911FCA8E87E034641FF02BF79E6
+
+Version 02.11.01 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.6.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.6.0
+	Management Engine (ME) Firmware, version 14.1.65.1969
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+
+
+	ENHANCEMENTS:  
+
+	FIXES:  
+	  - Fixes issue unexpected system shutdown during system restart.
+
+		PCR0(with TPM2.0 SHA256) = E89DFB7CBC3A5E378A620E5CFD92D97CF9548ECFA75A094C415C933F675EE5FB
+
+Version 02.11.00 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.6.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.6.0
+	Management Engine (ME) Firmware, version 14.1.65.1969
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+	ENHANCEMENTS:  
+	  - Adds Windows11 operating system support.
+	  - Update Intel RST PreOS driver to to 18.31.3.5434
+	  - Update Camera fw to enhance user experience.
+          - Enhancement to address security vulnerabilities CVE-2021-0091, CVE-2021-0156, CVE-2021-0157, CVE-2021-0158.
+	  - Update PD Firmware to v6.6 for compatibility enhancement.- Enhancement to address security vulnerabilities CVE-2022-21166, CVE-2022-21123, CVE-2022-21151, CVE-2022-0005.
+	  - Enhancement to address security vulnerabilities CVE-2021-33122.
+	  - Remove physical presence interface pops up when changing the ""Intel Software Guard Extensions (SGX)"" setting from ""Software control"" to ""Disable"".
+	  - Enhancement to address security vulnerabilities CVE-2022-23924, CVE-2022-23925, CVE-2022-23926, CVE-2022-23927, CVE-2022-23928, CVE-2022-23929, CVE-2022-23930, CVE-2022-23931, CVE-2022-23932, CVE-2022-23933, CVE-2022-23934.
+	  - Enhancement to address security vulnerabilities CVE-2022-23953, CVE-2022-23954, CVE-2022-23955, CVE-2022-23956, CVE-2022-23957, CVE-2022-23958.
+	  - Adds a feature to control display of BIOS Admin login based on ""BIOS Administrator visible at power-on authentication"" when Enhanced BIOS Authentication Mode (EBAM) is set.
+	  - Enhancement to address security vulnerabilities CVE-2022-0004.
+	  - Enhancement to address security vulnerabilities CVE-2021-33123, CVE-2021-33124, CVE-2021-33103.
+	
+	FIXES:  
+	  - Fixes issue where hub was turned off automatically and all ports have no function during BIOS update.
+	  - Fixes issue where Remote HP PC Diagnostics Execution Physical Presence Interface continuous occur when some specific settings are applied at the same time.
+	  - Fixes issue where some F10 settings or help message display incomplete when change to non-English language.- Fixes an issue where system attempt to recover ME infinitely if customer deploy recover image via 3-party application
+	  - Fixes an issue where TBT firmware display different fromat with Setup Menu during the BIOS update process via FUR (HP Firmware Update and Recovery).
+	  - Fixes an issue where system cannot boot to OS while 3-rd party audio card installed (Digigram VX222e)
+	  - Fixes issue where system failure to boot after switching between two different saved bootstores.
+		
+		PCR0(with TPM2.0 SHA256) = 94DF17E3A4E2409459ED282678364B7187CC48EFD43C515E1E27627A4E4DF035
+
+Version 02.10.10 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.6.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.6.0
+	Management Engine (ME) Firmware, version 14.1.60.1807
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+	ENHANCEMENTS:  
+	  - Enhancement to address security vulnerabilities CVE-2022-23924, CVE-2022-23925, CVE-2022-23926, CVE-2022-23927, CVE-2022-23928, CVE-2022-23929, CVE-2022-23930, CVE-2022-23931, CVE-2022-23932, CVE-2022-23933, CVE-2022-23934.
+	  - Enhancement to address security vulnerabilities CVE-2022-23953, CVE-2022-23954, CVE-2022-23955, CVE-2022-23956, CVE-2022-23957, CVE-2022-23958.
+	  - Adds a feature to control display of BIOS Admin login based on "BIOS Administrator visible at power-on authentication" when Enhanced BIOS Authentication Mode (EBAM) is set.
+
+	FIXES:  
+	  - Fixes issue where system would fail to boot after switching between two different saved bootstores.
+		
+		PCR0(with TPM2.0 SHA256) = E7A325FADB8C69FE4D73F8BE665CF8E2223D98F6896C812D2B2F32F43C3BE952
+
+Version 02.10.00 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.6.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.6.0
+	Management Engine (ME) Firmware, version 14.1.60.1807
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+        ENHANCEMENTS:  
+	  - Updates Intel ME Firmware 14.1.60.1807.
+	  - Enhancement to address security vulnerabilities CVE-2021-33107.
+	  - Enhancement to address security vulnerabilities CVE-2021-0103, CVE-2021-0107, CVE-2021-0111, CVE-2021-0114, CVE-2021-0115, CVE-2021-0116, CVE-2021-0117, CVE-2021-0118, CVE-2021-0119, CVE-2021-0124, CVE-2021-0125.
+	  - Enhancement to address security vulnerabilities CVE-2021-0127.
+	  - Enhancement to address security vulnerabilities CVE-2021-39297, CVE-2021-39299, CVE-2021-39300, CVE-2021-39301.
+	  - Disable Turbo Boost as BIOS default setting.
+
+	FIXES:  
+		
+		PCR0(with TPM2.0 SHA256) = 8CF3A8FE3C687F2AF14FE31735DE7A6CE08386A5DEECB2FD9878B1180ADD7AE8
+
+Version 02.09.00 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.6.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.6.0
+	Management Engine (ME) Firmware, version 14.1.53.1649
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+        ENHANCEMENTS:  
+	  - Adds Windows11 operating system support.
+	  - Update Intel RST PreOS driver to 18.31.3.5434
+          - Update Camera fw to enhance user experience.
+          - Enhancement to address security vulnerabilities CVE-2021-0091, CVE-2021-0156, CVE-2021-0157, CVE-2021-0158.
+          - Update PD Firmware to v6.6 for compatibility enhancement.
+
+	FIXES:  
+	  - Fixes issue where hub would automatically turn off and all ports would lose functionality during BIOS update.
+	  - Fixes issue where Remote HP PC Diagnostics Execution Physical Presence Interface continuously occurred when some specific settings are applied at the same time.
+	  - Fixes issue where some F10 settings or help messages display incomplete when system is changed to a non-English languag
+		
+		PCR0(with TPM2.0 SHA256) = B6CAB34E18600F06E732D1E9F413FCD84ECF1971BD9270D553399FE1B8AE5C45
+
+Version 02.08.01 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.3.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.3.0
+	Management Engine (ME) Firmware, version 14.1.53.1649
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+        ENHANCEMENTS:  
+	  - Adds support for Intel Pyramid Glacier.
+	  - Updates HP Firmware Update and Recovery tool to v2.0.31.1 to fix issue where current and new versions are reversed.
+
+	FIXES:  
+	  - Fixes issue where some F10 settings or help messages would not display completely when changing language to non-English language.
+	  - Fixes issue where Power On Password cannot be cleared after selecting 'Restore Security Settings to Factory Defaults' with Sure Admin enabled.
+          - Fixes issue where an error message pops up (0x8007054F) while enabling Power-On Authentication if user account name exceeds 11 characters.
+	  - Fixes issue where Intune service would report that the TCG device is 'NOT COMPLIANT'.
+	  - Fixes issue where PCR7 Configuration is 'Binding Not Possible' while Intel Management Engine is "permanently disable"
+		
+		PCR0(with TPM2.0 SHA256) = 8203A5D3CFE78642F92F617F36F6E114DD0C1268BF73543A81984B5A11142507
+ 
+Version 02.02.01 
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.17
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 6.3.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 6.3.0
+	Management Engine (ME) Firmware, version 14.1.53.1649
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+		
+        
+        -Update Intel Reference code to 09.00.45.10
+        -Update Intel MRC to 0.0.0.75
+	    -Update Intel Microcode to 0xE4/0xE6.
+        -Update Super IO to 09.08.17
+        -Update Management Engine (ME) Firmware, version to 14.1.53.1649
+        -Update Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C to 6.3.0
+        -Update Adjust minimum brightness for 23.8" panel
+        -Enhanced CVE-2020-24506, CVE-2020-24507, CVE-2020-8703, CVE-2020-8704, CVE-2020-24512, CVE-2020-24511, CVE-2020-12359, CVE-2020-8700 
+
+		PCR0(with TPM2.0 SHA256) = 3FB6FE2357C5D778C5E45CBE4BACE8DF284BEE54A2179F4A08D56A6AD91E7CDA
+Version 02.01.00
+	This BIOS upgrade package also includes the following firmware versions:		(only list appropriate ones)
+	SIO Firmware, version 09.08.14
+	Cypress Power Delivery (PD) Firmware (CCG5),Cypress - CCG5C: 5.8.0
+	Intel GOP EFI Driver, version 9.0.1107.A.11
+	USB Type-C PD firmware FW 5.8.0
+	Management Engine (ME) Firmware, version 14.0.45.1389
+	Intel UEFI PXE Driver, version 0.0.24
+        Realtek UEFI PXE Driver, version 2.025
+	- Initial BIOS release. 
+		PCR0(with TPM2.0 SHA256) = C24CCDCAD861B65C4C89415ED0A2047E4CC53CCA022FA7F5C8304DB817B16C23
+
