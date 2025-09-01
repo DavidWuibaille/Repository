@@ -1,4 +1,4 @@
-Set LogFile=c:\exploit\log\migrationw11.log
+Set LogFile=c:\windows\temp\migrationw11.log
 Set LDMSserver=ldcore.monlab.lan
 md c:\exploit
 md c:\exploit\log
