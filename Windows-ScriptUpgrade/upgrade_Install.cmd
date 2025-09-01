@@ -1,5 +1,5 @@
 Set LogFile=c:\exploit\log\migrationw11.log
-Set LDMSserver=ldcore.kiabi.fr
+Set LDMSserver=ldcore.monlab.lan
 md c:\exploit
 md c:\exploit\log
 md c:\pnpdrivers
